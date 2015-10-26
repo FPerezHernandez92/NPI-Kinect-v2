@@ -1,0 +1,14 @@
+﻿<Window x:Class="WriteableBitmapEx.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Loaded="MainWindow_Loaded">
+    <Grid x:Name="LayoutRoot" Width="550" Height="650">
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" FontSize="14" Text="WriteableBitmapEx - Silverlight WriteableBitmap Extensions - Shape Sample" />
+            <Grid Name="ViewPortContainer" Width="512" Height="512" Margin="0,10">
+                <Image Name="ImageViewport" />
+                <Rectangle Stroke="Black" />
+            </Grid>
+            </StackPanel>
+        </Grid>
+</Window>

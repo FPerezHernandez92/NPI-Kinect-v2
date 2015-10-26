@@ -142,6 +142,17 @@ namespace NPIKinectv2
         private const double ClipBoundsThickness = 10;
 
         /// <summary>
+        ///  Points donde voy a almacenar los de la cabeza, hombros y pies
+        /// </summary>
+        Point cabeza;
+        Point hombroDerecho;
+        Point hombroIzquierdo;
+        Point pieDerecho;
+        Point pieIzquierdo;
+        Point manoDerecha;
+        Point manoIzquierda;
+
+        /// <summary>
         /// Inicialización de una nueva instancia de la clase MainWindow
         /// </summary>
         public MainWindow()
@@ -320,7 +331,58 @@ namespace NPIKinectv2
                 // ignoramos si los frame no esta disponible
             }
         }
-        
+
+        /// <summary>
+        /// Función para indicar al usuario los movimientos que debe realizar
+        /// </summary>
+        private void ControlaPosicion()
+        {
+            int widthPantallaMin, widthPantallaMax, widthTotal, heightPantallaMin, heightPantallaMax, heightTotal;
+            double porcentaje = 0.1;
+
+            //limalt.Text = (this.Width * (porcentaje)).ToString();
+            //limder.Text = (this.Width * (1-porcentaje)).ToString();
+            //widthPantallaMin = (int) (this.Width * porcentaje);
+            //widthPantallaMax = (int) (this.Width * (1 - porcentaje));
+            //HE TENIDO QUE MODIFICAR ESTOS VALORES YA QUE NO ME VALIAN LOS DEL XAML
+            widthPantallaMin = 250;
+            widthPantallaMax = 1550;
+            heightPantallaMin = 0;
+            heightPantallaMax = 958;
+            heightTotal = heightPantallaMax - heightPantallaMin;
+            widthTotal = widthPantallaMax - widthPantallaMin;
+            if ((int)cabeza.X < ((widthTotal * porcentaje) + widthPantallaMin))
+            {
+                MovimientoText.Text = "Muevete a la derecha";
+            }
+            else if ((int)cabeza.X > ((widthTotal * (1 - porcentaje)) + widthPantallaMin))
+            {
+                MovimientoText.Text = "Muevete a la izquierda";
+            }
+            else
+            {
+                if ((int)pieDerecho.Y > ((heightTotal * (1 - porcentaje)) + heightPantallaMin))
+                {
+                    MovimientoText.Text = "Alejate";
+                }
+                else if ((int)cabeza.Y < ((heightTotal * (porcentaje*2)) + heightPantallaMin))
+                {
+                    MovimientoText.Text = "Alejate";
+                }
+                else
+                {
+                    if ((int)manoDerecha.Y > (int)cabeza.Y)
+                    {
+                        MovimientoText.Text = "Levanta la mano derecha";
+                    }
+                    else
+                    {
+                        MovimientoText.Text = "PERFECTO";
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Manejador para los datos de llegada del sensor del body
         /// </summary>
@@ -354,6 +416,7 @@ namespace NPIKinectv2
                                 if (body.IsTracked)
                                 {
                                     this.DrawClippedEdges(body, dc);
+                                    this.ControlaPosicion();
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 
@@ -400,6 +463,7 @@ namespace NPIKinectv2
 
             // Torso
             this.DrawBone(joints, jointPoints, JointType.Head, JointType.Neck, drawingContext);
+            cabeza = jointPoints[JointType.Head];
             this.DrawBone(joints, jointPoints, JointType.Neck, JointType.SpineShoulder, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.SpineShoulder, JointType.SpineMid, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.SpineMid, JointType.SpineBase, drawingContext);
@@ -410,15 +474,19 @@ namespace NPIKinectv2
 
             // Brazo derecho   
             this.DrawBone(joints, jointPoints, JointType.ShoulderRight, JointType.ElbowRight, drawingContext);
+            hombroDerecho = jointPoints[JointType.ShoulderRight];
             this.DrawBone(joints, jointPoints, JointType.ElbowRight, JointType.WristRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristRight, JointType.HandRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.HandRight, JointType.HandTipRight, drawingContext);
+            manoDerecha = jointPoints[JointType.HandRight];
             this.DrawBone(joints, jointPoints, JointType.WristRight, JointType.ThumbRight, drawingContext);
 
             // Brazo izquierdo
             this.DrawBone(joints, jointPoints, JointType.ShoulderLeft, JointType.ElbowLeft, drawingContext);
+            hombroIzquierdo = jointPoints[JointType.ShoulderLeft];
             this.DrawBone(joints, jointPoints, JointType.ElbowLeft, JointType.WristLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristLeft, JointType.HandLeft, drawingContext);
+            manoIzquierda = jointPoints[JointType.HandLeft];
             this.DrawBone(joints, jointPoints, JointType.HandLeft, JointType.HandTipLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristLeft, JointType.ThumbLeft, drawingContext);
 
@@ -426,11 +494,13 @@ namespace NPIKinectv2
             this.DrawBone(joints, jointPoints, JointType.HipRight, JointType.KneeRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.KneeRight, JointType.AnkleRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.AnkleRight, JointType.FootRight, drawingContext);
+            pieDerecho = jointPoints[JointType.AnkleRight];
 
             // Pierna izquierda
             this.DrawBone(joints, jointPoints, JointType.HipLeft, JointType.KneeLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.KneeLeft, JointType.AnkleLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.AnkleLeft, JointType.FootLeft, drawingContext);
+            pieIzquierdo = jointPoints[JointType.AnkleLeft];
 
             // Dibujamos las uniones
             foreach (JointType jointType in joints.Keys)

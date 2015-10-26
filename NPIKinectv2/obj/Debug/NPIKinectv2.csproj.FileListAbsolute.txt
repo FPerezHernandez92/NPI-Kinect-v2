@@ -1,0 +1,14 @@
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.csprojResolveAssemblyReference.cache
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\MainWindow.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\App.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.cache
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.lref
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\MainWindow.baml
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.g.resources
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.Properties.Resources.resources
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.pdb

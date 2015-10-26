@@ -50,6 +50,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WriteableBitmapEx.Wpf">
+      <HintPath>..\..\..\NPI - Nuevos paradigmas de interacción\PolloGit\Practica1NPIKinect\NPIEjercicio1a\lib\WriteableBitmapEx_v1.5.0.0\WriteableBitmapEx_v1.5.0.0\WPF\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

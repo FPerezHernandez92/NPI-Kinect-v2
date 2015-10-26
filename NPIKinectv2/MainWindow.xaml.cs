@@ -109,7 +109,7 @@ namespace NPIKinectv2
         public MainWindow()
         {
             // for Alpha, one sensor is supported
-            this.kinectSensor = KinectSensor.Default;
+            this.kinectSensor = KinectSensor.GetDefault();
 
             if (this.kinectSensor != null)
             {
@@ -218,19 +218,7 @@ namespace NPIKinectv2
                 this.bodyFrameReader.Dispose();
                 this.bodyFrameReader = null;
             }
-
-            // Body is IDisposable
-            if (this.bodies != null)
-            {
-                foreach (Body body in this.bodies)
-                {
-                    if (body != null)
-                    {
-                        body.Dispose();
-                    }
-                }
-            }
-
+            
             if (this.kinectSensor != null)
             {
                 this.kinectSensor.Close();

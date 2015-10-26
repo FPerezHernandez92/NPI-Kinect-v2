@@ -27,95 +27,128 @@ namespace NPIKinectv2
     {
 
         /// <summary>
-        /// Size of the RGB pixel in the bitmap
+        /// Tamaño de los pixel RGB en el bitmap
         /// </summary>
         private readonly int bytesPerPixel = (PixelFormats.Bgr32.BitsPerPixel + 7) / 8;
 
         /// <summary>
-        /// Active Kinect sensor
+        /// Activar el sensor de kinect
         /// </summary>
         private KinectSensor kinectSensor = null;
 
         /// <summary>
-        /// Reader for color frames
+        /// Lector de color frames
         /// </summary>
         private ColorFrameReader colorFrameReader = null;
 
         /// <summary>
-        /// Bitmap to display
+        /// Bitmap en pantalla
         /// </summary>
         private WriteableBitmap bitmap = null;
 
+        /// <summary>
+        /// Color del círculo de la mano cuando está cerrada
+        /// </summary>
         private readonly Brush handClosedBrush = new SolidColorBrush(Color.FromArgb(128, 255, 0, 0));
 
         /// <summary>
-        /// Brush used for drawing hands that are currently tracked as opened
+        /// Color del círculo de la mano cuando está abierta
         /// </summary>
         private readonly Brush handOpenBrush = new SolidColorBrush(Color.FromArgb(128, 0, 255, 0));
 
         /// <summary>
-        /// Brush used for drawing hands that are currently tracked as in lasso (pointer) position
+        /// Color del círculo de la mano cuando está apuntando
         /// </summary>
         private readonly Brush handLassoBrush = new SolidColorBrush(Color.FromArgb(128, 0, 0, 255));
 
         /// <summary>
-        /// Brush used for drawing joints that are currently tracked
+        /// Color de las articulaciones no inferidas
         /// </summary>
         private readonly Brush trackedJointBrush = new SolidColorBrush(Color.FromArgb(255, 68, 192, 68));
 
         /// <summary>
-        /// Brush used for drawing joints that are currently inferred
+        /// Color de las articulaciones inferidas
         /// </summary>        
         private readonly Brush inferredJointBrush = Brushes.Yellow;
 
         /// <summary>
-        /// Pen used for drawing bones that are currently tracked
+        /// Color de los huesos
         /// </summary>
         private readonly Pen trackedBonePen = new Pen(Brushes.Green, 6);
 
         /// <summary>
-        /// Pen used for drawing bones that are currently inferred
+        /// Color de los huesos inferidos
         /// </summary>        
         private readonly Pen inferredBonePen = new Pen(Brushes.Gray, 1);
+
+        /// <summary>
+        /// Grosor de los puntos de union
+        /// </summary>  
         private const double JointThickness = 3;
+
+        /// <summary>
+        /// Tamaño de las manos
+        /// </summary>  
         private const double HandSize = 30;
 
-
         /// <summary>
-        /// Intermediate storage for receiving frame data from the sensor
+        /// Almacenamiento intermedio para recibir datos frame del sensor en color
         /// </summary>
         private byte[] pixels = null;
-        private byte[] bodyBytespixels = null;
-
-        private CoordinateMapper coordinateMapper = null;
-
 
         /// <summary>
-        /// Timer for FPS calculation
+        /// Almacenamiento intermedio para recibir datos del sensor del cuerpo
+        /// </summary>
+        private byte[] bodyBytespixels = null;
+
+        /// <summary>
+        /// Mapeador de la cordinacion
+        /// </summary>
+        private CoordinateMapper coordinateMapper = null;
+
+        /// <summary>
+        /// Cronometro para calcular los FPS
         /// </summary>
         private int displayWidth;
+
+        /// <summary>
+        /// Cronometro para calcular los FPS
+        /// </summary>
         private int displayHeight;
-        RenderTargetBitmap bmp;
+
+        /// <summary>
+        /// Cuadrilla para represenatar la imagen
+        /// </summary>
         Grid rootGrid;
-        Image img;
+
+        /// <summary>
+        /// Imagen del cuerpo 
+        /// </summary>
         Image bodyImage;
 
+        /// <summary>
+        /// Mapa de bit para guardar el stream de color
+        /// </summary>
         private readonly WriteableBitmap _colorWriteableBitmap;
+
+        /// <summary>
+        /// Mapa de bit para guardar el stream del cuerpo
+        /// </summary>
         private readonly WriteableBitmap _bodyWriteableBitmap;
 
         /// <summary>
-        /// Initializes a new instance of the MainWindow class.
+        /// Inicialización de una nueva instancia de la clase MainWindow
         /// </summary>
         public MainWindow()
         {
-            // for Alpha, one sensor is supported
+            // Ponemos el sensor por defecto para abrirlo
             this.kinectSensor = KinectSensor.GetDefault();
 
             if (this.kinectSensor != null)
             {
                 this.coordinateMapper = this.kinectSensor.CoordinateMapper;
 
-                // open the sensor
+                // Abrimos el sensor
                 this.kinectSensor.Open();
 
                 FrameDescription frameDescription = this.kinectSensor.ColorFrameSource.FrameDescription;
@@ -123,15 +156,15 @@ namespace NPIKinectv2
                 this.displayHeight = frameDescription.Height;
                 this.bodies = new Body[this.kinectSensor.BodyFrameSource.BodyCount];
 
-                // open the colorFrameReader for the color frames
+                // Abrimos el lector colorFrameReader y bodyFrameReader para el color frame y el cuerpo
                 this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
                 this.bodyFrameReader = this.kinectSensor.BodyFrameSource.OpenReader();
 
-                // allocate space to put the pixels being received
+                // Iniciamos el espacio donde vamos a almacenar los pixeles que se vayan recibiendo
                 this.pixels = new byte[frameDescription.Width * frameDescription.Height * this.bytesPerPixel];
                 this.bodyBytespixels = new byte[frameDescription.Width * frameDescription.Height * this.bytesPerPixel];
 
-                // create the bitmap to display
+                // Creamos el bitmap para la pantalla
                 this.bitmap = new WriteableBitmap(frameDescription.Width, frameDescription.Height, 96.0, 96.0, PixelFormats.Bgr32, null);
                 this.drawingGroup = new DrawingGroup();
                 _bodySourceRTB = new RenderTargetBitmap(displayWidth, displayHeight, 96.0, 96.0, PixelFormats.Pbgra32);
@@ -142,10 +175,10 @@ namespace NPIKinectv2
             }
 
 
-            // use the window object as the view model in this simple example
+            // Usamos el objeto ventana como el view model
             this.DataContext = this;
 
-            // initialize the components (controls) of the window
+            // Inicializamos los componetes (controles) de la ventana
             this.InitializeComponent();
 
             Image.Source = _colorWriteableBitmap;
@@ -153,12 +186,12 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// INotifyPropertyChangedPropertyChanged event to allow window controls to bind to changeable data
+        /// Notificador del manejador de eventos para indicar los cambios en los datos 
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Gets the bitmap to display
+        /// Obtenemos el bitmap para la pantalla 
         /// </summary>
         public ImageSource ImageSource
         {
@@ -169,21 +202,23 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Gets or sets the current status text to display
+        /// Variables para el lector del cuerpo, donde los almacenaremos, y donde almacenamos el body
         /// </summary>
-
         private BodyFrameReader bodyFrameReader = null;
         private Body[] bodies = null;
         private RenderTargetBitmap _bodySourceRTB;
 
+        /// <summary>
+        /// Donde vamos a dibujar la union de bones 
+        /// </summary>
         private DrawingGroup drawingGroup;
 
 
         /// <summary>
-        /// Execute start up tasks
+        /// Comenzamos la ejecucion de tareas
         /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
+        /// <param name="sender">objeto que envia los enventos</param>
+        /// <param name="e">argumentos del evento</param>
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             if (this.colorFrameReader != null)
@@ -199,22 +234,22 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Execute shutdown tasks
+        /// Ejecutamos la suspensión de las tareas
         /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
+        /// <param name="sender">objeto que envia los eventos</param>
+        /// <param name="e">argumentos del evento</param>
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             if (this.colorFrameReader != null)
             {
-                // ColorFrameReder is IDisposable
+                // ColorFrameReder está disponible
                 this.colorFrameReader.Dispose();
                 this.colorFrameReader = null;
             }
 
             if (this.bodyFrameReader != null)
             {
-                // BodyFrameReder is IDisposable
+                // BodyFrameReder está disponible
                 this.bodyFrameReader.Dispose();
                 this.bodyFrameReader = null;
             }
@@ -227,10 +262,10 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Handles the color frame data arriving from the sensor
+        /// Manejador para los datos de llegada del sensor del color frame
         /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
+        /// <param name="sender">objetos enviados del evento</param>
+        /// <param name="e">argumentos del evento</param>
         private void ColorFrameReaderFrameArrived(object sender, ColorFrameArrivedEventArgs e)
         {
             ColorFrameReference frameReference = e.FrameReference;
@@ -241,12 +276,12 @@ namespace NPIKinectv2
 
                 if (frame != null)
                 {
-                    // ColorFrame is IDisposable
+                    // ColorFrame está disponible
                     using (frame)
                     {
                         FrameDescription frameDescription = frame.FrameDescription;
 
-                        // verify data and write the new color frame data to the display bitmap
+                        // Verificamos que los datos y la escritura de los nuevos datos de color frame se pueden hacer en la pantalla del bitmap
                         if ((frameDescription.Width == this.bitmap.PixelWidth) && (frameDescription.Height == this.bitmap.PixelHeight))
                         {
                             if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
@@ -274,10 +309,15 @@ namespace NPIKinectv2
             }
             catch (Exception)
             {
-                // ignore if the frame is no longer available
+                // ignoramos si los frame no esta disponible
             }
         }
-
+        
+        /// <summary>
+        /// Manejador para los datos de llegada del sensor del body
+        /// </summary>
+        /// <param name="sender">objetos enviados del evento</param>
+        /// <param name="e">argumentos del evento</param>
         private void BodyFrameReaderFrameArrived(object sender, BodyFrameArrivedEventArgs e)
         {
             BodyFrameReference frameReference = e.FrameReference;
@@ -288,18 +328,17 @@ namespace NPIKinectv2
 
                 if (frame != null)
                 {
-                    // BodyFrame is IDisposable
+                    // BodyFrame está disponible
                     using (frame)
                     {
                         using (DrawingContext dc = this.drawingGroup.Open())
                         {
-                            // Draw a transparent background to set the render size
+                            // Dibujamos un fondo transparente para fijar el tamaño del render
 
                             dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
 
-                            // The first time GetAndRefreshBodyData is called, Kinect will allocate each Body in the array.
-                            // As long as those body objects are not disposed and not set to null in the array,
-                            // those body objects will be re-used.
+                            // La primera vez que se llama, Kinect alojará cada cuerpo en el array.
+                            // Mientras estos objetos del cuerpo no se desechen o no se pongan a null en el array, se pueden volver a suar .
                             frame.GetAndRefreshBodyData(this.bodies);
 
                             foreach (Body body in this.bodies)
@@ -308,7 +347,7 @@ namespace NPIKinectv2
                                 {
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 
-                                    // convert the joint points to depth (display) space
+                                    // convierte los puntos de union de profuncidad (pantalla) del espacio
                                     var jointPoints = new Dictionary<JointType, Point>();
                                     foreach (JointType jointType in joints.Keys)
                                     {
@@ -323,7 +362,7 @@ namespace NPIKinectv2
                                 }
                             }
 
-                            // prevent drawing outside of our render area
+                            // impide dibujar fuera del area del render
                             this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
                             bodyImage = new Image { Source = new DrawingImage(drawingGroup), Width = this.displayWidth, Height = this.displayHeight };
                             rootGrid.Children.Clear();
@@ -341,13 +380,13 @@ namespace NPIKinectv2
             }
             catch (Exception)
             {
-                // ignore if the frame is no longer available
+                // ignoramos si los frame no esta disponible
             }
         }
 
         private void DrawBody(IReadOnlyDictionary<JointType, Joint> joints, IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext)
         {
-            // Draw the bones
+            // Dibujamos los huesos
 
             // Torso
             this.DrawBone(joints, jointPoints, JointType.Head, JointType.Neck, drawingContext);
@@ -359,31 +398,31 @@ namespace NPIKinectv2
             this.DrawBone(joints, jointPoints, JointType.SpineBase, JointType.HipRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.SpineBase, JointType.HipLeft, drawingContext);
 
-            // Right Arm    
+            // Brazo derecho   
             this.DrawBone(joints, jointPoints, JointType.ShoulderRight, JointType.ElbowRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.ElbowRight, JointType.WristRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristRight, JointType.HandRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.HandRight, JointType.HandTipRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristRight, JointType.ThumbRight, drawingContext);
 
-            // Left Arm
+            // Brazo izquierdo
             this.DrawBone(joints, jointPoints, JointType.ShoulderLeft, JointType.ElbowLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.ElbowLeft, JointType.WristLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristLeft, JointType.HandLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.HandLeft, JointType.HandTipLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristLeft, JointType.ThumbLeft, drawingContext);
 
-            // Right Leg
+            // Pierna derecha
             this.DrawBone(joints, jointPoints, JointType.HipRight, JointType.KneeRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.KneeRight, JointType.AnkleRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.AnkleRight, JointType.FootRight, drawingContext);
 
-            // Left Leg
+            // Pierna izquierda
             this.DrawBone(joints, jointPoints, JointType.HipLeft, JointType.KneeLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.KneeLeft, JointType.AnkleLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.AnkleLeft, JointType.FootLeft, drawingContext);
 
-            // Draw the joints
+            // Dibujamos las uniones
             foreach (JointType jointType in joints.Keys)
             {
                 Brush drawBrush = null;
@@ -407,33 +446,33 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Draws one bone of a body (joint to joint)
+        /// Dibujar un hueso del cuerpo (articulación a articulación)
         /// </summary>
-        /// <param name="joints">joints to draw</param>
-        /// <param name="jointPoints">translated positions of joints to draw</param>
-        /// <param name="jointType0">first joint of bone to draw</param>
-        /// <param name="jointType1">second joint of bone to draw</param>
-        /// <param name="drawingContext">drawing context to draw to</param>
+        /// <param name="joints">Uniones para dibujar</param>
+        /// <param name="jointPoints">Translación de posición de las uniones dibujadas</param>
+        /// <param name="jointType0">Prirema unión del hueso dibujado</param>
+        /// <param name="jointType1">Segunda unión del hueso dibujado</param>
+        /// <param name="drawingContext">Dibujo del contexto para dibujar</param>
         private void DrawBone(IReadOnlyDictionary<JointType, Joint> joints, IDictionary<JointType, Point> jointPoints, JointType jointType0, JointType jointType1, DrawingContext drawingContext)
         {
             Joint joint0 = joints[jointType0];
             Joint joint1 = joints[jointType1];
 
-            // If we can't find either of these joints, exit
+            // Si no podemos encontrar alguno de las uniones, salimos
             if (joint0.TrackingState == TrackingState.NotTracked ||
                 joint1.TrackingState == TrackingState.NotTracked)
             {
                 return;
             }
 
-            // Don't draw if both points are inferred
+            // No dibujamos si cada punto fue inferido
             if (joint0.TrackingState == TrackingState.Inferred &&
                 joint1.TrackingState == TrackingState.Inferred)
             {
                 return;
             }
 
-            // We assume all drawn bones are inferred unless BOTH joints are tracked
+            // Asumimos que todos los huesos han sido inferidos a menos que se rastreen ambas articulaciones 
             Pen drawPen = this.inferredBonePen;
             if ((joint0.TrackingState == TrackingState.Tracked) && (joint1.TrackingState == TrackingState.Tracked))
             {
@@ -444,11 +483,11 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Draws a hand symbol if the hand is tracked: red circle = closed, green circle = opened; blue circle = lasso
+        /// Dibujamos un simbolo de la mano is se produce: círculo rojo = cerrada, verde = abierta, azul = señalando
         /// </summary>
-        /// <param name="handState">state of the hand</param>
-        /// <param name="handPosition">position of the hand</param>
-        /// <param name="drawingContext">drawing context to draw to</param>
+        /// <param name="handState">estado de la mano</param>
+        /// <param name="handPosition">posición de la mano</param>
+        /// <param name="drawingContext">Dibujamos el contesto para dibujar</param>
         private void DrawHand(HandState handState, Point handPosition, DrawingContext drawingContext)
         {
             switch (handState)

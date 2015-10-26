@@ -12,3 +12,8 @@ D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.Prop
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.exe
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\Microsoft.Kinect.dll
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.dll
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\Microsoft.Kinect.xml
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.pdb
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.xml

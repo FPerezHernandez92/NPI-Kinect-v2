@@ -137,6 +137,11 @@ namespace NPIKinectv2
         private readonly WriteableBitmap _bodyWriteableBitmap;
 
         /// <summary>
+        /// Grosor del borde del rectángulo
+        /// </summary>
+        private const double ClipBoundsThickness = 10;
+
+        /// <summary>
         /// Inicialización de una nueva instancia de la clase MainWindow
         /// </summary>
         public MainWindow()
@@ -348,6 +353,8 @@ namespace NPIKinectv2
                             {
                                 if (body.IsTracked)
                                 {
+                                    this.DrawClippedEdges(body, dc);
+
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 
                                     // convierte los puntos de union de profuncidad (pantalla) del espacio
@@ -506,6 +513,48 @@ namespace NPIKinectv2
                 case HandState.Lasso:
                     drawingContext.DrawEllipse(this.handLassoBrush, null, handPosition, HandSize, HandSize);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Dibujar los indicadores de los bordes si el cuerpo los pisa
+        /// </summary>
+        /// <param name="body">cuerpo para dibujar la información</param>
+        /// <param name="drawingContext">Dibujamos el contesto para dibujar</param>
+        private void DrawClippedEdges(Body body, DrawingContext drawingContext)
+        {
+            FrameEdges clippedEdges = body.ClippedEdges;
+
+            if (clippedEdges.HasFlag(FrameEdges.Bottom))
+            {
+                drawingContext.DrawRectangle(
+                    Brushes.Red,
+                    null,
+                    new Rect(0, this.displayHeight - ClipBoundsThickness, this.displayWidth, ClipBoundsThickness));
+            }
+
+            if (clippedEdges.HasFlag(FrameEdges.Top))
+            {
+                drawingContext.DrawRectangle(
+                    Brushes.Red,
+                    null,
+                    new Rect(0, 0, this.displayWidth, ClipBoundsThickness));
+            }
+
+            if (clippedEdges.HasFlag(FrameEdges.Left))
+            {
+                drawingContext.DrawRectangle(
+                    Brushes.Red,
+                    null,
+                    new Rect(0, 0, ClipBoundsThickness, this.displayHeight));
+            }
+
+            if (clippedEdges.HasFlag(FrameEdges.Right))
+            {
+                drawingContext.DrawRectangle(
+                    Brushes.Red,
+                    null,
+                    new Rect(this.displayWidth - ClipBoundsThickness, 0, ClipBoundsThickness, this.displayHeight));
             }
         }
     }

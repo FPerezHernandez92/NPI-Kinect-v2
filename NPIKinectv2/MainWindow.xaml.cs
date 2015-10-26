@@ -231,6 +231,9 @@ namespace NPIKinectv2
                 this.bodyFrameReader.FrameArrived += this.BodyFrameReaderFrameArrived;
             }
 
+            PosicionInicio.Visibility = System.Windows.Visibility.Visible;
+            InstruccionesText.Text = "Imitame";
+
         }
 
         /// <summary>

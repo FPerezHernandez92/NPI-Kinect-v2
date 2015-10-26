@@ -232,7 +232,7 @@ namespace NPIKinectv2
             }
 
             PosicionInicio.Visibility = System.Windows.Visibility.Visible;
-            InstruccionesText.Text = "Imitame";
+            InstruccionesText.Text = "Imítame";
 
         }
 

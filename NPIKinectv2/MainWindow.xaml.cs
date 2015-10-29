@@ -373,7 +373,7 @@ namespace NPIKinectv2
                 {
                     if ((int)manoDerecha.Y > (int)cabeza.Y)
                     {
-                        MovimientoText.Text = "Levanta la mano derecha";
+                        MovimientoText.Text = "Levanta la mano izquierda";
                     }
                     else
                     {

@@ -1,3 +1,3 @@
 añadir porcentaje
-modificar que tienes que tener la mano sobre el circulo para que esté verde
 quitar esqueleto
+añadir problemas presentados

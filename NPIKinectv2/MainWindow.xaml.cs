@@ -25,6 +25,10 @@ namespace NPIKinectv2
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Porcenaje de error que vamos a admitir.
+        /// </summary>
+        double porcentaje = 0.15;
 
         /// <summary>
         /// Tamaño de los pixel RGB en el bitmap
@@ -342,7 +346,7 @@ namespace NPIKinectv2
         private void ControlaPosicion()
         {
             int widthPantallaMin, widthPantallaMax, widthTotal, heightPantallaMin, heightPantallaMax, heightTotal;
-            double porcentaje = 0.1;
+            int manoEjeX = 1236, manoEjeY = 184;
 
             //limalt.Text = (this.Width * (porcentaje)).ToString();
             //limder.Text = (this.Width * (1-porcentaje)).ToString();
@@ -395,7 +399,7 @@ namespace NPIKinectv2
                 }
                 else
                 {
-                    if ((int)manoDerecha.Y > (int)cabeza.Y)
+                    if ((int)manoDerecha.Y > ((int)cabeza.Y * (1 - porcentaje)))
                     {
                         MovimientoText.Text = "Levanta la mano izquierda";
                         circuloRojo.Visibility = System.Windows.Visibility.Visible;
@@ -406,12 +410,26 @@ namespace NPIKinectv2
                     }
                     else
                     {
-                        MovimientoText.Text = "Coloca la mano en el círculo";
-                        circuloVerde.Visibility = System.Windows.Visibility.Visible;
-                        circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-
-                        flecha1.Visibility = System.Windows.Visibility.Hidden;
-                        flecha2.Visibility = System.Windows.Visibility.Hidden;
+                        if (!(
+                            ((int)manoDerecha.X > (manoEjeX - (manoEjeX * porcentaje))) && ((int)manoDerecha.X < (manoEjeX + (manoEjeX * porcentaje)))
+                            &&
+                            ((int)manoDerecha.Y > (manoEjeY - (manoEjeY * porcentaje))) && ((int)manoDerecha.Y < (manoEjeY + (manoEjeY * porcentaje)))
+                            ))
+                        {
+                            MovimientoText.Text = "Coloca la mano en el círculo";
+                            circuloVerde.Visibility = System.Windows.Visibility.Visible;
+                            circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                            flecha1.Visibility = System.Windows.Visibility.Hidden;
+                            flecha2.Visibility = System.Windows.Visibility.Hidden;
+                        }
+                        else
+                        {
+                            MovimientoText.Text = "COMIENZA EL JUEGO";
+                            circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                            circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                            flecha1.Visibility = System.Windows.Visibility.Hidden;
+                            flecha2.Visibility = System.Windows.Visibility.Hidden;
+                        }
                     }
                 }
             }

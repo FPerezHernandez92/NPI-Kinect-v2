@@ -36,8 +36,8 @@
                 </LinearGradientBrush>
             </TextBlock.Background>
         </TextBlock>
-        <Image x:Name="circuloRojo" Margin="704,69,378,4050" Source="circuloRojo.png" Stretch="Fill"/>
-        <Image x:Name="circuloVerde" Margin="704,69,378,4050" Source="circuloVerde.png" Stretch="Fill"/>
+        <Image x:Name="circuloRojo" Margin="704,69,378,4050" Source="circuloRojo.png" Stretch="Fill" Opacity="0.7"/>
+        <Image x:Name="circuloVerde" Margin="704,69,378,4050" Source="circuloVerde.png" Stretch="Fill" Opacity="0.7"/>
         <Image x:Name="flecha2" Margin="316,267,745,3807" Source="flecha2.png" Stretch="Fill"/>
         <Image x:Name="flecha1" Margin="745,267,316,3807" Source="flecha1.png" Stretch="Fill"/>
     </Grid>

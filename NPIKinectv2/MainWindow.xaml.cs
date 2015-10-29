@@ -361,7 +361,7 @@ namespace NPIKinectv2
             widthTotal = widthPantallaMax - widthPantallaMin;
             if ((int)cabeza.X < ((widthTotal * porcentaje) + widthPantallaMin))
             {
-                MovimientoText.Text = "Muevete a la derecha";
+                MovimientoText.Text = "Muevete al centro";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
 
@@ -370,7 +370,7 @@ namespace NPIKinectv2
             }
             else if ((int)cabeza.X > ((widthTotal * (1 - porcentaje)) + widthPantallaMin))
             {
-                MovimientoText.Text = "Muevete a la izquierda";
+                MovimientoText.Text = "Muevete al centro";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
 
@@ -401,7 +401,7 @@ namespace NPIKinectv2
                 {
                     if ((int)manoDerecha.Y > ((int)cabeza.Y * (1 - porcentaje)))
                     {
-                        MovimientoText.Text = "Levanta la mano izquierda";
+                        MovimientoText.Text = "Levanta la mano";
                         circuloRojo.Visibility = System.Windows.Visibility.Visible;
                         circuloVerde.Visibility = System.Windows.Visibility.Hidden;
 

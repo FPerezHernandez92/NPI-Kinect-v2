@@ -431,7 +431,7 @@ namespace NPIKinectv2
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
 
                 flecha1.Visibility = System.Windows.Visibility.Visible;
-                flecha2.Visibility = System.Windows.Visibility.Hidden;
+                flecha2.Visibility = System.Windows.Visibility.Visible;
             }
             else if ((int)cabeza.X > ((widthTotal * (1 - porcH)) + widthPantallaMin))
             {
@@ -439,7 +439,7 @@ namespace NPIKinectv2
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
 
-                flecha1.Visibility = System.Windows.Visibility.Hidden;
+                flecha1.Visibility = System.Windows.Visibility.Visible;
                 flecha2.Visibility = System.Windows.Visibility.Visible;
             }
             else

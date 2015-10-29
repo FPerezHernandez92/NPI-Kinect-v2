@@ -38,8 +38,17 @@
         </TextBlock>
         <Image x:Name="circuloRojo" Margin="704,69,378,4050" Source="circuloRojo.png" Stretch="Fill" Opacity="0.7"/>
         <Image x:Name="circuloVerde" Margin="704,69,378,4050" Source="circuloVerde.png" Stretch="Fill" Opacity="0.7"/>
-        <Image x:Name="flecha2" Margin="316,267,745,3807" Source="flecha2.png" Stretch="Fill"/>
-        <Image x:Name="flecha1" Margin="745,267,316,3807" Source="flecha1.png" Stretch="Fill"/>
+        <Image x:Name="flecha2" Margin="736,288,275,3755" Source="flecha2.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.945"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.842"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="flecha1" Margin="300,291,715,3752" Source="flecha1.png" Stretch="Fill"/>
         <TextBlock x:Name="porcHText" HorizontalAlignment="Left" Margin="1056,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

@@ -28,7 +28,9 @@ namespace NPIKinectv2
         /// <summary>
         /// Porcenaje de error que vamos a admitir.
         /// </summary>
-        double porcentaje = 0.15;
+        double porcH = 0.15;
+        double porcV = 0.15;
+        double porcIni = 0.15;
 
         /// <summary>
         /// Tamaño de los pixel RGB en el bitmap
@@ -156,6 +158,16 @@ namespace NPIKinectv2
         Point manoDerecha;
         Point manoIzquierda;
 
+        // Añadimos comandos para hotkeys
+        public static RoutedCommand teclaMasMargenH = new RoutedCommand();
+        public static RoutedCommand teclaMenosMargenH = new RoutedCommand();
+
+        public static RoutedCommand teclaMasMargenV = new RoutedCommand();
+        public static RoutedCommand teclaMenosMargenV = new RoutedCommand();
+
+        public static RoutedCommand teclaMasMargenIni = new RoutedCommand();
+        public static RoutedCommand teclaMenosMargenIni = new RoutedCommand();
+
         /// <summary>
         /// Inicialización de una nueva instancia de la clase MainWindow
         /// </summary>
@@ -203,6 +215,53 @@ namespace NPIKinectv2
 
             Image.Source = _colorWriteableBitmap;
 
+            // Asignamos combinación de teclas a comandos.
+            teclaMasMargenH.InputGestures.Add(new KeyGesture(Key.Z, ModifierKeys.Control));
+            teclaMenosMargenH.InputGestures.Add(new KeyGesture(Key.X, ModifierKeys.Control));
+
+            teclaMasMargenV.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Control));
+            teclaMenosMargenV.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
+
+            teclaMasMargenIni.InputGestures.Add(new KeyGesture(Key.B, ModifierKeys.Control));
+            teclaMenosMargenIni.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+
+        }
+
+        // Añadimos funciones a realizar con hotkeys.
+        private void masMargenH(object sender, ExecutedRoutedEventArgs e)
+        {
+            porcH += 0.05;
+            porcHText.Text = porcH.ToString();
+        }
+
+        private void menosMargenH(object sender, ExecutedRoutedEventArgs e)
+        {
+            porcH -= 0.05;
+            porcHText.Text = porcH.ToString();
+        }
+
+        private void masMargenV(object sender, ExecutedRoutedEventArgs e)
+        {
+            porcV += 0.05;
+            porcVText.Text = porcV.ToString();
+        }
+
+        private void menosMargenV(object sender, ExecutedRoutedEventArgs e)
+        {
+            porcV -= 0.05;
+            porcVText.Text = porcV.ToString();
+        }
+
+        private void masMargenIni(object sender, ExecutedRoutedEventArgs e)
+        {
+            porcIni += 0.05;
+            porcIniText.Text = porcIni.ToString();
+        }
+
+        private void menosMargenIni(object sender, ExecutedRoutedEventArgs e)
+        {
+            porcIni -= 0.05;
+            porcIniText.Text = porcIni.ToString();
         }
 
         /// <summary>
@@ -257,6 +316,11 @@ namespace NPIKinectv2
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
             InstruccionesText.Text = "Imítame";
+
+            porcHText.Text = porcH.ToString();
+            porcVText.Text = porcV.ToString();
+            porcIniText.Text = porcIni.ToString();
+
 
         }
 
@@ -340,6 +404,7 @@ namespace NPIKinectv2
             }
         }
 
+    
         /// <summary>
         /// Función para indicar al usuario los movimientos que debe realizar
         /// </summary>
@@ -359,7 +424,7 @@ namespace NPIKinectv2
             heightPantallaMax = 958;
             heightTotal = heightPantallaMax - heightPantallaMin;
             widthTotal = widthPantallaMax - widthPantallaMin;
-            if ((int)cabeza.X < ((widthTotal * porcentaje) + widthPantallaMin))
+            if ((int)cabeza.X < ((widthTotal * porcH) + widthPantallaMin))
             {
                 MovimientoText.Text = "Muevete al centro";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
@@ -368,7 +433,7 @@ namespace NPIKinectv2
                 flecha1.Visibility = System.Windows.Visibility.Visible;
                 flecha2.Visibility = System.Windows.Visibility.Hidden;
             }
-            else if ((int)cabeza.X > ((widthTotal * (1 - porcentaje)) + widthPantallaMin))
+            else if ((int)cabeza.X > ((widthTotal * (1 - porcH)) + widthPantallaMin))
             {
                 MovimientoText.Text = "Muevete al centro";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
@@ -379,7 +444,7 @@ namespace NPIKinectv2
             }
             else
             {
-                if ((int)pieDerecho.Y > ((heightTotal * (1 - porcentaje)) + heightPantallaMin))
+                if ((int)pieDerecho.Y > ((heightTotal * (1 - porcV)) + heightPantallaMin))
                 {
                     MovimientoText.Text = "Alejate";
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
@@ -388,7 +453,7 @@ namespace NPIKinectv2
                     flecha1.Visibility = System.Windows.Visibility.Hidden;
                     flecha2.Visibility = System.Windows.Visibility.Hidden;
                 }
-                else if ((int)cabeza.Y < ((heightTotal * (porcentaje*2)) + heightPantallaMin))
+                else if ((int)cabeza.Y < ((heightTotal * (porcV * 2)) + heightPantallaMin))
                 {
                     MovimientoText.Text = "Alejate";
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
@@ -399,7 +464,7 @@ namespace NPIKinectv2
                 }
                 else
                 {
-                    if ((int)manoDerecha.Y > ((int)cabeza.Y * (1 - porcentaje)))
+                    if ((int)manoDerecha.Y > ((int)cabeza.Y))
                     {
                         MovimientoText.Text = "Levanta la mano";
                         circuloRojo.Visibility = System.Windows.Visibility.Visible;
@@ -411,9 +476,9 @@ namespace NPIKinectv2
                     else
                     {
                         if (!(
-                            ((int)manoDerecha.X > (manoEjeX - (manoEjeX * porcentaje))) && ((int)manoDerecha.X < (manoEjeX + (manoEjeX * porcentaje)))
+                            ((int)manoDerecha.X > (manoEjeX - (manoEjeX * porcIni))) && ((int)manoDerecha.X < (manoEjeX + (manoEjeX * porcIni)))
                             &&
-                            ((int)manoDerecha.Y > (manoEjeY - (manoEjeY * porcentaje))) && ((int)manoDerecha.Y < (manoEjeY + (manoEjeY * porcentaje)))
+                            ((int)manoDerecha.Y > (manoEjeY - (manoEjeY * porcIni))) && ((int)manoDerecha.Y < (manoEjeY + (manoEjeY * porcIni)))
                             ))
                         {
                             MovimientoText.Text = "Coloca la mano en el círculo";

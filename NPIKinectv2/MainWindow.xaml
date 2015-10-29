@@ -40,5 +40,61 @@
         <Image x:Name="circuloVerde" Margin="704,69,378,4050" Source="circuloVerde.png" Stretch="Fill" Opacity="0.7"/>
         <Image x:Name="flecha2" Margin="316,267,745,3807" Source="flecha2.png" Stretch="Fill"/>
         <Image x:Name="flecha1" Margin="745,267,316,3807" Source="flecha1.png" Stretch="Fill"/>
+        <TextBlock x:Name="porcHText" HorizontalAlignment="Left" Margin="1056,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock x:Name="porcVText" HorizontalAlignment="Left" Margin="1056,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock x:Name="porcIniText" HorizontalAlignment="Left" Margin="1056,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock x:Name="porcHText_Copy" HorizontalAlignment="Left" Margin="1000,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold" Text="H%">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock x:Name="porcVText_Copy" HorizontalAlignment="Left" Margin="1000,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold" Text="V%">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock x:Name="porcIniText_Copy" HorizontalAlignment="Left" Margin="1000,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold" Text="In%">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
     </Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenH}" Executed="menosMargenH"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenV}" Executed="masMargenV"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenV}" Executed="menosMargenV"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenIni}" Executed="masMargenIni"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenIni}" Executed="menosMargenIni"/>
+    </Window.CommandBindings>
 </Window>

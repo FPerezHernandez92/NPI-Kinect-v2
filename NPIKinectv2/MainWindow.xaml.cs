@@ -250,6 +250,8 @@ namespace NPIKinectv2
             PosicionInicio.Visibility = System.Windows.Visibility.Visible;
             circuloRojo.Visibility = System.Windows.Visibility.Hidden;
             circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+            flecha1.Visibility = System.Windows.Visibility.Hidden;
+            flecha2.Visibility = System.Windows.Visibility.Hidden;
             InstruccionesText.Text = "Imítame";
 
         }
@@ -358,12 +360,18 @@ namespace NPIKinectv2
                 MovimientoText.Text = "Muevete a la derecha";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+
+                flecha1.Visibility = System.Windows.Visibility.Visible;
+                flecha2.Visibility = System.Windows.Visibility.Hidden;
             }
             else if ((int)cabeza.X > ((widthTotal * (1 - porcentaje)) + widthPantallaMin))
             {
                 MovimientoText.Text = "Muevete a la izquierda";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+
+                flecha1.Visibility = System.Windows.Visibility.Hidden;
+                flecha2.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
@@ -372,12 +380,18 @@ namespace NPIKinectv2
                     MovimientoText.Text = "Alejate";
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                     circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+
+                    flecha1.Visibility = System.Windows.Visibility.Hidden;
+                    flecha2.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else if ((int)cabeza.Y < ((heightTotal * (porcentaje*2)) + heightPantallaMin))
                 {
                     MovimientoText.Text = "Alejate";
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                     circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+
+                    flecha1.Visibility = System.Windows.Visibility.Hidden;
+                    flecha2.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
@@ -386,12 +400,18 @@ namespace NPIKinectv2
                         MovimientoText.Text = "Levanta la mano izquierda";
                         circuloRojo.Visibility = System.Windows.Visibility.Visible;
                         circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+
+                        flecha1.Visibility = System.Windows.Visibility.Hidden;
+                        flecha2.Visibility = System.Windows.Visibility.Hidden;
                     }
                     else
                     {
                         MovimientoText.Text = "Coloca la mano en el círculo";
                         circuloVerde.Visibility = System.Windows.Visibility.Visible;
                         circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+
+                        flecha1.Visibility = System.Windows.Visibility.Hidden;
+                        flecha2.Visibility = System.Windows.Visibility.Hidden;
                     }
                 }
             }

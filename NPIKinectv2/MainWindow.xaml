@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Stretch="UniformToFill" Name="Image" Margin="10,10,0,3427"  />
+        <Image Grid.Row="0" Stretch="UniformToFill" Name="Image" Margin="10,0,0,3548"  />
         <Image x:Name="PosicionInicio" Margin="995,351,29,3548" Source="Figura2.JPG" Stretch="Fill" RenderTransformOrigin="-0.005,0.038"/>
         <TextBlock x:Name="InstruccionesText" HorizontalAlignment="Left" Margin="30,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="100" FontSize="24" FontWeight="Bold">
             <TextBlock.Background>
@@ -36,7 +36,9 @@
                 </LinearGradientBrush>
             </TextBlock.Background>
         </TextBlock>
-        <Image x:Name="circuloRojo" Margin="704,69,378,4034" Source="circuloRojo.png" Stretch="Fill"/>
-        <Image x:Name="circuloVerde" Margin="704,69,378,4034" Source="circuloVerde.png" Stretch="Fill"/>
+        <Image x:Name="circuloRojo" Margin="704,69,378,4050" Source="circuloRojo.png" Stretch="Fill"/>
+        <Image x:Name="circuloVerde" Margin="704,69,378,4050" Source="circuloVerde.png" Stretch="Fill"/>
+        <Image x:Name="flecha2" Margin="316,267,745,3807" Source="flecha2.png" Stretch="Fill"/>
+        <Image x:Name="flecha1" Margin="745,267,316,3807" Source="flecha1.png" Stretch="Fill"/>
     </Grid>
 </Window>

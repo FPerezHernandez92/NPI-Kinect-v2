@@ -248,6 +248,8 @@ namespace NPIKinectv2
             }
 
             PosicionInicio.Visibility = System.Windows.Visibility.Visible;
+            circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+            circuloVerde.Visibility = System.Windows.Visibility.Hidden;
             InstruccionesText.Text = "Imítame";
 
         }
@@ -354,30 +356,42 @@ namespace NPIKinectv2
             if ((int)cabeza.X < ((widthTotal * porcentaje) + widthPantallaMin))
             {
                 MovimientoText.Text = "Muevete a la derecha";
+                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
             }
             else if ((int)cabeza.X > ((widthTotal * (1 - porcentaje)) + widthPantallaMin))
             {
                 MovimientoText.Text = "Muevete a la izquierda";
+                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
             }
             else
             {
                 if ((int)pieDerecho.Y > ((heightTotal * (1 - porcentaje)) + heightPantallaMin))
                 {
                     MovimientoText.Text = "Alejate";
+                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else if ((int)cabeza.Y < ((heightTotal * (porcentaje*2)) + heightPantallaMin))
                 {
                     MovimientoText.Text = "Alejate";
+                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
                     if ((int)manoDerecha.Y > (int)cabeza.Y)
                     {
                         MovimientoText.Text = "Levanta la mano izquierda";
+                        circuloRojo.Visibility = System.Windows.Visibility.Visible;
+                        circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                     }
                     else
                     {
-                        MovimientoText.Text = "PERFECTO";
+                        MovimientoText.Text = "Coloca la mano en el círculo";
+                        circuloVerde.Visibility = System.Windows.Visibility.Visible;
+                        circuloRojo.Visibility = System.Windows.Visibility.Hidden;
                     }
                 }
             }

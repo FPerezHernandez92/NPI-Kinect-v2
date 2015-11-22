@@ -14,21 +14,13 @@
             <Setter Property="SnapsToDevicePixels" Value="True" />
         </Style>
     </Window.Resources>
+    
     <Grid Margin="10 0 10 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Stretch="UniformToFill" Name="Image" Margin="10,10,10,9151"  />
-        <TextBlock x:Name="MovimientoText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="69" Width="201" FontSize="24" FontWeight="Bold">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <Image x:Name="circuloRojo" Margin="1171,156,671,9784" Source="circuloRojo.png" Stretch="Fill" Opacity="0.7" Width="50" Height="50"/>
-        <Image x:Name="circuloVerde" Margin="1171,156,671,9784" Source="circuloVerde.png" Stretch="Fill" Opacity="0.7" Width="50" Height="50"/>
+        <TextBlock x:Name="MovimientoText" Background="Transparent" HorizontalAlignment="Center" Margin="655,378,641,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="596" FontSize="32" TextAlignment="Center" FontWeight="Bold"/>
         <Image x:Name="flecha2" Margin="1243,518,499,9522" Source="flecha2.png" Stretch="Fill" Width="150" Height="150">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -40,60 +32,12 @@
             </Image.RenderTransform>
         </Image>
         <Image x:Name="flecha1" Margin="490,518,1252,9522" Source="flecha1.png" Stretch="Fill" Width="150" Height="150"/>
-        <TextBlock x:Name="porcHText" HorizontalAlignment="Left" Margin="1833,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBlock x:Name="porcVText" HorizontalAlignment="Left" Margin="1833,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBlock x:Name="porcIniText" HorizontalAlignment="Left" Margin="1833,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBlock x:Name="porcHText_Copy" HorizontalAlignment="Left" Margin="1779,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold" Text="H%">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBlock x:Name="porcVText_Copy" HorizontalAlignment="Left" Margin="1779,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold" Text="V%">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
-        <TextBlock x:Name="porcIniText_Copy" HorizontalAlignment="Left" Margin="1779,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="49" FontSize="24" FontWeight="Bold" Text="In%">
-            <TextBlock.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Background>
-        </TextBlock>
         <Image x:Name="bombilla" Margin="1346,396,481,9704" Source="bombilla.png" Stretch="Fill" Width="65" Height="90"/>
         <Image x:Name="play" Margin="912,171,915,9971" Source="play.png" Stretch="Fill" Width="65" Height="65"/>
         <Image x:Name="cancel" Margin="1251,312,576,9847" Source="cancel.png" Stretch="Fill" Width="65" Height="65"/>
         <Image x:Name="settings" Margin="575,312,1252,9847" Source="settings.png" Stretch="Fill" Width="65" Height="65"/>
         <Label Name="lblTime" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <TextBlock x:Name="CronoText" HorizontalAlignment="Left" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="69" Width="201" FontSize="24" FontWeight="Bold" >
+        <TextBlock x:Name="CronoText" HorizontalAlignment="Left" Margin="872,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="153" FontSize="24" FontWeight="Bold" TextAlignment="Center" >
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -102,7 +46,7 @@
             </TextBlock.Background>
         </TextBlock>
         <Image x:Name="refresh" Margin="1171,180,656,9980" Source="refresh.png" Stretch="Fill" Width="65" Height="65"/>
-        <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="0,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="94" Width="154" FontSize="48" Background="Transparent"/>
+        <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="193,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="94" Width="154" FontSize="48" Background="Transparent"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="656,524,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.5,0.5" SmallChange="0" Width="590" Maximum="2" TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="False" Value="1" Background="Transparent">
             <Slider.LayoutTransform>
                 <ScaleTransform ScaleY="3" CenterX="15" CenterY="15"/>
@@ -120,6 +64,7 @@
         <TextBlock x:Name="difitex2" HorizontalAlignment="Left" Margin="912,530,0,0" TextWrapping="Wrap" Text="Media" VerticalAlignment="Top" FontSize="26.667"/>
         <TextBlock x:Name="difitex3" HorizontalAlignment="Left" Margin="1202,530,0,0" TextWrapping="Wrap" Text="Dificil" VerticalAlignment="Top" FontSize="26.667"/>
         <TextBlock x:Name="difitex4" HorizontalAlignment="Left" Margin="885,440,0,0" TextWrapping="Wrap" Text="DIFICULTAD" VerticalAlignment="Top" FontSize="26.667"/>
+        <TextBlock x:Name="mejortiempoText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="139" Width="178" FontSize="48" Background="Transparent" Text="Mejor Tiempo:"/>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

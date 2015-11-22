@@ -26,6 +26,7 @@ namespace NPIKinectv2
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
         /// <summary>
         /// Porcenaje de error que vamos a admitir.
         /// </summary>
@@ -410,7 +411,6 @@ namespace NPIKinectv2
             tocarBotonMenu(1251 + 50, 312 + 50, 3, handStateleft, handStateright); //options
             tocarBotonMenu(575 + 50, 312 + 50, 2, handStateleft, handStateright); //cancel
 
-
             //poner el puño cerrado
         }
 
@@ -498,7 +498,6 @@ namespace NPIKinectv2
 
         private void IniciarOpciones(HandState handStateleft, HandState handStateright)
         {
-            MovimientoText.Text = "en opciones";
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
@@ -549,37 +548,31 @@ namespace NPIKinectv2
         private void masMargenH(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_alto += 0.05;
-            porcHText.Text = porcentaje_alto.ToString();
         }
 
         private void menosMargenH(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_alto -= 0.05;
-            porcHText.Text = porcentaje_alto.ToString();
         }
 
         private void masMargenV(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_bajo += 0.05;
-            porcVText.Text = porcentaje_bajo.ToString();
         }
 
         private void menosMargenV(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_bajo -= 0.05;
-            porcVText.Text = porcentaje_bajo.ToString();
         }
 
         private void masMargenIni(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_lados += 0.05;
-            porcIniText.Text = porcentaje_lados.ToString();
         }
 
         private void menosMargenIni(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_lados -= 0.05;
-            porcIniText.Text = porcentaje_lados.ToString();
         }
         
         /// <summary>
@@ -629,9 +622,7 @@ namespace NPIKinectv2
             {
                 this.bodyFrameReader.FrameArrived += this.BodyFrameReaderFrameArrived;
             }
-
-            circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-            circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+            
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
             bombilla.Visibility = System.Windows.Visibility.Hidden;
@@ -651,14 +642,6 @@ namespace NPIKinectv2
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-
-
-            porcHText.Text = porcentaje_alto.ToString();
-            porcVText.Text = porcentaje_bajo.ToString();
-            porcIniText.Text = porcentaje_lados.ToString();
-
-            
-
         }
 
         /// <summary>
@@ -760,9 +743,7 @@ namespace NPIKinectv2
             {
                 MovimientoText.Text = "Alejate";
                 colocado = false;
-
-                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                
                 flecha1.Visibility = System.Windows.Visibility.Hidden;
                 flecha2.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -770,9 +751,7 @@ namespace NPIKinectv2
             {
                 MovimientoText.Text = "Alejate";
                 colocado = false;
-
-                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                
                 flecha1.Visibility = System.Windows.Visibility.Hidden;
                 flecha2.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -782,9 +761,7 @@ namespace NPIKinectv2
                 {
                     MovimientoText.Text = "Muevete al centro";
                     colocado = false;
-
-                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                    
                     flecha1.Visibility = System.Windows.Visibility.Visible;
                     flecha2.Visibility = System.Windows.Visibility.Visible;
                 }
@@ -792,9 +769,7 @@ namespace NPIKinectv2
                 {
                     MovimientoText.Text = "Muevete al centro";
                     colocado = false;
-
-                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                    
                     flecha1.Visibility = System.Windows.Visibility.Visible;
                     flecha2.Visibility = System.Windows.Visibility.Visible;
                 }
@@ -899,7 +874,6 @@ namespace NPIKinectv2
                                             if (tocada[8])
                                             {
                                                 bombilla.Visibility = System.Windows.Visibility.Hidden;
-                                                MovimientoText.Text = "Ganaste";
                                                 dispatcherTimer.Stop();
                                                 refresh.Visibility = System.Windows.Visibility.Visible;
                                                 tocarBotonMenu(1171+50, 180 + 50, 0, handStateleft, handStateright);  //refresh

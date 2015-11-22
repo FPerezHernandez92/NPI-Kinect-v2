@@ -88,6 +88,7 @@
                 </LinearGradientBrush>
             </TextBlock.Background>
         </TextBlock>
+        <Image x:Name="bombilla" Margin="1346,396,481,9704" Source="bombilla.png" Stretch="Fill" Width="65" Height="90"/>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

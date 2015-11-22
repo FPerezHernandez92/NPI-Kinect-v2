@@ -31,6 +31,9 @@ namespace NPIKinectv2
         double porcentaje_alto = 0.10;
         double porcentaje_bajo = 0.10;
         double porcentaje_lados = 0.10;
+        double precision = 0.03;
+        bool tocada1 = false, tocada2 = false;
+        bool colocado = false;
 
         /// <summary>
         /// Tamaño de los pixel RGB en el bitmap
@@ -314,6 +317,7 @@ namespace NPIKinectv2
             circuloVerde.Visibility = System.Windows.Visibility.Hidden;
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
+            bombilla.Visibility = System.Windows.Visibility.Hidden;
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();
@@ -420,6 +424,7 @@ namespace NPIKinectv2
             if ( ((int)cabeza.Y) < heightPantallaMin)
             {
                 MovimientoText.Text = "Alejate";
+                colocado = false;
 
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
@@ -429,6 +434,7 @@ namespace NPIKinectv2
             else if (( ((int)pieDerecho.Y) > heightPantallaMax) || (((int)pieIzquierdo.Y) > heightPantallaMax))
             {
                 MovimientoText.Text = "Alejate";
+                colocado = false;
 
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
@@ -440,6 +446,7 @@ namespace NPIKinectv2
                 if (((int)manoIzquierda.X) < widthPantallaMin)
                 {
                     MovimientoText.Text = "Muevete al centro";
+                    colocado = false;
 
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                     circuloRojo.Visibility = System.Windows.Visibility.Hidden;
@@ -449,6 +456,7 @@ namespace NPIKinectv2
                 else if (((int)manoDerecha.X) > widthPantallaMax)
                 {
                     MovimientoText.Text = "Muevete al centro";
+                    colocado = false;
 
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                     circuloRojo.Visibility = System.Windows.Visibility.Hidden;
@@ -458,9 +466,72 @@ namespace NPIKinectv2
                 else
                 {
                     MovimientoText.Text = " ";
+                    colocado = true;
                 }
             }
             
+        }
+
+        void tocarBombilla1(int posXbombilla, int posYbombilla)
+        {
+            if ((((int)manoDerecha.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoDerecha.X < (posXbombilla + (posXbombilla * precision))))
+                ||
+                (((int)manoIzquierda.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoIzquierda.X < (posXbombilla + (posXbombilla * precision)))))
+            {
+                if ((((int)manoDerecha.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoDerecha.Y < (posYbombilla + (posYbombilla * precision))))
+                    ||
+                    (((int)manoIzquierda.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoIzquierda.Y < (posYbombilla + (posYbombilla * precision)))))
+                {
+                    tocada1 = true;
+                }
+            }
+        }
+
+        void tocarBombilla2(int posXbombilla, int posYbombilla)
+        {
+            if ((((int)manoDerecha.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoDerecha.X < (posXbombilla + (posXbombilla * precision))))
+                ||
+                (((int)manoIzquierda.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoIzquierda.X < (posXbombilla + (posXbombilla * precision)))))
+            {
+                if ((((int)manoDerecha.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoDerecha.Y < (posYbombilla + (posYbombilla * precision))))
+                    ||
+                    (((int)manoIzquierda.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoIzquierda.Y < (posYbombilla + (posYbombilla * precision)))))
+                {
+                    tocada2 = true;
+                }
+            }
+        }
+
+        private void JuegoAgilidad()
+        {
+            //Añadir contador de tiempo y de puntos
+            //De momento solo van a salir 8 pelotas 
+            int posXbombilla = 1346+50;
+            int posYbombilla = 396+50;
+
+            bombilla.Visibility = System.Windows.Visibility.Visible;
+
+            if (!tocada1)
+            {
+                tocarBombilla1(posXbombilla, posYbombilla);
+            }
+            if (tocada1)
+            {
+                if (!tocada2)
+                {
+                    bombilla.Margin = new Thickness(590, 518, 1252, 9522);
+                    tocarBombilla2(590 + 50, 518 + 50);
+                }
+                if (tocada2)
+                {
+
+                    bombilla.Visibility = System.Windows.Visibility.Hidden;
+                    MovimientoText.Text = "Ganaste";
+                }
+            }
+            
+            
+
         }
 
         /// <summary>
@@ -497,6 +568,7 @@ namespace NPIKinectv2
                                 {
                                     this.DrawClippedEdges(body, dc);
                                     this.ControlaPosicion();
+                                    if (colocado) this.JuegoAgilidad();
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 

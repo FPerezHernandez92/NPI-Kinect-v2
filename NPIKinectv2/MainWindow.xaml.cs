@@ -1,23 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-//Using añadidos
 using System.ComponentModel;
-using System.Diagnostics;
 using Microsoft.Kinect;
-using System.Collections.Generic;
-using System.Windows.Threading;
 
 namespace NPIKinectv2
 {
@@ -26,30 +15,57 @@ namespace NPIKinectv2
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-
         /// <summary>
-        /// Porcenaje de error que vamos a admitir.
+        /// Porcentaje de error que vamos a admitir.
         /// </summary>
         double porcentaje_alto = 0.10;
         double porcentaje_bajo = 0.10;
         double porcentaje_lados = 0.10;
         double precision = 0.03;
+
+        /// <summary>
+        /// Flags para bombillas tocadas.
+        /// </summary>
         bool[] tocada = { false, false, false, false, false, false, false, false, false};
+
+        /// <summary>
+        ///Flag para colocar al usuario.
+        /// </summary>
         bool colocado = false;
 
+        /// <summary>
+        /// Flags para movernos entre menús.
+        /// </summary>
         bool[] botonesmenu = { true, false, false ,false};
 
+        /// <summary>
+        /// Iniciamos el tiempo.
+        /// </summary>
         int segundos = 0;
+
+        /// <summary>
+        /// Inicializamos variable para record.
+        /// </summary>
         int mejor_tiempo = 999999;
+
+        /// <summary>
+        /// Variable para controlar el tiempo.
+        /// </summary>
         DateTime dt;
 
+        /// <summary>
+        /// Variables para controlar que mano está abierta en el menú de opciones.
+        /// </summary>
         bool activadoder = false, activadoizq = false;
+
+        /// <summary>
+        /// Temporizador.
+        /// </summary>
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        
 
-
-
-        // Mostrar esqueleto
+        /// <summary>
+        /// Variable para mostrar el esqueleto.
+        /// </summary>
         bool skeletonFlag = false;
 
         /// <summary>
@@ -178,7 +194,9 @@ namespace NPIKinectv2
         Point manoDerecha;
         Point manoIzquierda;
 
-        // Añadimos comandos para hotkeys
+        /// <summary>
+        /// Añadidos teclas para hotkeys, modificamos el porcentaje de error de los margenes, la dificultad del juego y el flag que muestra el esqueleto.
+        /// </summary>
         public static RoutedCommand teclaMasMargenH = new RoutedCommand();
         public static RoutedCommand teclaMenosMargenH = new RoutedCommand();
 
@@ -195,30 +213,47 @@ namespace NPIKinectv2
         /// </summary>
         public MainWindow()
         {
-            // Ponemos el sensor por defecto para abrirlo
+            /// <summary>
+            /// Iniciamos el sensor por defecto.
+            /// </summary>
             this.kinectSensor = KinectSensor.GetDefault();
 
             if (this.kinectSensor != null)
             {
                 this.coordinateMapper = this.kinectSensor.CoordinateMapper;
 
-                // Abrimos el sensor
+                /// <summary>
+                /// Abrimos el sensor.
+                /// </summary>
                 this.kinectSensor.Open();
 
+                /// <summary>
+                /// Obtenemos el ancho y el largo del display que vamos a mostrar.
+                /// </summary>
                 FrameDescription frameDescription = this.kinectSensor.ColorFrameSource.FrameDescription;
                 this.displayWidth = frameDescription.Width;
                 this.displayHeight = frameDescription.Height;
+
+                /// <summary>
+                /// Iniciamos los bodies.
+                /// </summary>
                 this.bodies = new Body[this.kinectSensor.BodyFrameSource.BodyCount];
 
-                // Abrimos el lector colorFrameReader y bodyFrameReader para el color frame y el cuerpo
+                /// <summary>
+                /// Abrimos el lector colorFrameReader y bodyFrameReader para el color frame y el cuerpo.
+                /// </summary>
                 this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
                 this.bodyFrameReader = this.kinectSensor.BodyFrameSource.OpenReader();
 
-                // Iniciamos el espacio donde vamos a almacenar los pixeles que se vayan recibiendo
+                /// <summary>
+                /// Iniciamos el espacio donde vamos a almacenar los pixeles que se vayan recibiendo
+                /// </summary>
                 this.pixels = new byte[frameDescription.Width * frameDescription.Height * this.bytesPerPixel];
                 this.bodyBytespixels = new byte[frameDescription.Width * frameDescription.Height * this.bytesPerPixel];
 
-                // Creamos el bitmap para la pantalla
+                /// <summary>
+                /// Creamos el bitmap para la pantalla
+                /// </summary>
                 this.bitmap = new WriteableBitmap(frameDescription.Width, frameDescription.Height, 96.0, 96.0, PixelFormats.Bgr32, null);
                 this.drawingGroup = new DrawingGroup();
                 _bodySourceRTB = new RenderTargetBitmap(displayWidth, displayHeight, 96.0, 96.0, PixelFormats.Pbgra32);
@@ -228,16 +263,21 @@ namespace NPIKinectv2
                 _bodyWriteableBitmap = BitmapFactory.New(frameDescription.Width, frameDescription.Height);
             }
 
-
-            // Usamos el objeto ventana como el view model
+            /// <summary>
+            /// Usamos el objeto ventana como el view model.
+            /// </summary>
             this.DataContext = this;
 
-            // Inicializamos los componetes (controles) de la ventana
+            /// <summary>
+            /// Inicializamos los componetes (controles) de la ventana.
+            /// </summary>
             this.InitializeComponent();
 
             Image.Source = _colorWriteableBitmap;
 
-            // Asignamos combinación de teclas a comandos.
+            /// <summary>
+            /// Asignamos combinación de teclas a comandos.
+            /// </summary
             teclaMasMargenH.InputGestures.Add(new KeyGesture(Key.Z, ModifierKeys.Control));
             teclaMenosMargenH.InputGestures.Add(new KeyGesture(Key.X, ModifierKeys.Control));
 
@@ -250,7 +290,9 @@ namespace NPIKinectv2
             teclaMostrarEsqueleto.InputGestures.Add(new KeyGesture(Key.M, ModifierKeys.Control));
         }
 
-
+        /// <summary>
+        /// Mostramos el esqueleto con las teclas CTRL+M
+        /// </summary
         private void mostrarSkeleton(object sender, ExecutedRoutedEventArgs e)
         {
             if( skeletonFlag == false)
@@ -263,6 +305,9 @@ namespace NPIKinectv2
             }
         }
 
+        /// <summary>
+        /// Función para navegar por los menús.
+        /// </summary
         private void Interfaz(HandState handStateleft, HandState handStateright)
         {
             if (botonesmenu[0])
@@ -279,6 +324,9 @@ namespace NPIKinectv2
             }
         }
 
+        /// <summary>
+        /// Función que controla las acciones a realizar al tocar los distintos botones de los menús.
+        /// </summary
         void tocarBotonMenu(int posX, int posY, int i, HandState handStateleft, HandState handStateright)
         {
             if ((((int)manoDerecha.X > (posX - (posX * precision))) && ((int)manoDerecha.X < (posX + (posX * precision))))
@@ -387,7 +435,9 @@ namespace NPIKinectv2
             }
         }
 
-        
+        /// <summary>
+        /// Inicia el menú inicial mostrando los botones del mismo. También ponemos la precisión del menú e inicializamos las variables del juego.
+        /// </summary
         private void IniciarMenu(HandState handStateleft, HandState handStateright)
         {
             play.Visibility = System.Windows.Visibility.Visible;
@@ -410,10 +460,11 @@ namespace NPIKinectv2
             tocarBotonMenu(912 + 50, 171 + 50, 1, handStateleft, handStateright); //play
             tocarBotonMenu(1251 + 50, 312 + 50, 3, handStateleft, handStateright); //options
             tocarBotonMenu(575 + 50, 312 + 50, 2, handStateleft, handStateright); //cancel
-
-            //poner el puño cerrado
         }
 
+        /// <summary>
+        /// Controla el slider de dificultad del menú de opciones.
+        /// </summary
         private void controlarSlider(int posX, int posY, HandState handStateleft, HandState handStateright)
         {
             if ((((int)manoDerecha.X > (posX - (300))) && ((int)manoDerecha.X < (posX + (300))))
@@ -496,6 +547,9 @@ namespace NPIKinectv2
 
         }
 
+        /// <summary>
+        /// Inicia el menú de opciones.
+        /// </summary
         private void IniciarOpciones(HandState handStateleft, HandState handStateright)
         {
             play.Visibility = System.Windows.Visibility.Hidden;
@@ -513,19 +567,20 @@ namespace NPIKinectv2
             tocarBotonMenu(1171 + 50, 180 + 50, 0,handStateleft, handStateright);  //refresh
 
             controlarSlider(251+713+50,524+50,handStateleft, handStateright);
-
-            // Modificar precisión y margenes.
-            // Boton de volver a Menu inicial.
         }
 
-
+        /// <summary>
+        /// Controla el temporizador y lo muestra en pantalla.
+        /// </summary
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             segundos++;
             CronoText.Text = dt.AddSeconds(segundos).ToString("mm:ss");
         }
 
-
+        /// <summary>
+        /// Inicia el menú de juego.
+        /// </summary
         private void IniciarJuego(HandState handStateleft, HandState handStateright)
         {
             play.Visibility = System.Windows.Visibility.Hidden;
@@ -544,7 +599,9 @@ namespace NPIKinectv2
         }
 
 
-        // Añadimos funciones a realizar con hotkeys.
+        /// <summary>
+        /// Funciones para controlar las acciones de los hotkeys.
+        /// </summary
         private void masMargenH(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_alto += 0.05;
@@ -622,24 +679,27 @@ namespace NPIKinectv2
             {
                 this.bodyFrameReader.FrameArrived += this.BodyFrameReaderFrameArrived;
             }
-            
+
+            /// <summary>
+            /// Iniciamos todos los elementos gráficos.
+            /// </summary
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
             bombilla.Visibility = System.Windows.Visibility.Hidden;
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
-
             refresh.Visibility = System.Windows.Visibility.Hidden;
-
             slider.Visibility = System.Windows.Visibility.Hidden;
             difitex1.Visibility = System.Windows.Visibility.Hidden;
             difitex2.Visibility = System.Windows.Visibility.Hidden;
             difitex3.Visibility = System.Windows.Visibility.Hidden;
-
             difitex4.Visibility = System.Windows.Visibility.Hidden;
 
 
+            /// <summary>
+            /// Creamos el temporizador y le añadimos un tiempo de tick.
+            /// </summary
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         }
@@ -687,12 +747,16 @@ namespace NPIKinectv2
 
                 if (frame != null)
                 {
-                    // ColorFrame está disponible
+                    /// <summary>
+                    /// Colorframe está disponible.
+                    /// </summary
                     using (frame)
                     {
                         FrameDescription frameDescription = frame.FrameDescription;
 
-                        // Verificamos que los datos y la escritura de los nuevos datos de color frame se pueden hacer en la pantalla del bitmap
+                        /// <summary>
+                        /// Verificamos que los datos y la escritura de los nuevos datos de color frame se pueden hacer en la pantalla del 
+                        /// </summary
                         if ((frameDescription.Width == this.bitmap.PixelWidth) && (frameDescription.Height == this.bitmap.PixelHeight))
                         {
                             if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
@@ -724,9 +788,8 @@ namespace NPIKinectv2
             }
         }
 
-    
         /// <summary>
-        /// Función para indicar al usuario los movimientos que debe realizar
+        /// Función para indicar al usuario los movimientos que debe realizar.
         /// </summary>
         private void ControlaPosicion()
         {
@@ -782,6 +845,9 @@ namespace NPIKinectv2
             
         }
 
+        /// <summary>
+        /// Pone la bombilla a tocada durante el juego.
+        /// </summary>
         void tocarBombilla(int posXbombilla, int posYbombilla, int i)
         {
             if ((((int)manoDerecha.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoDerecha.X < (posXbombilla + (posXbombilla * precision))))
@@ -796,21 +862,18 @@ namespace NPIKinectv2
                 }
             }
         }
-        
-        
+
+        /// <summary>
+        /// Inicia el juego.
+        /// </summary>
         private void JuegoAgilidad(HandState handStateleft, HandState handStateright)
         {
-            //Añadir contador de tiempo y de puntos
-            //De momento solo van a salir 8 pelotas 
-
             int[] bomb1 = { 1346, 590, 1292, 642, 913, 590, 623, 733, 1047 };
             int[] bomb2 = { 396, 518, 256, 180, 661, 396, 737, 340, 128 };
             int[] bomb3 = { 481, 1252, 550, 1200, 929, 1252, 1219, 1109, 795 };
             int[] bomb4 = { 9704, 9522, 9884, 9960, 9479, 9744, 9403, 9800, 10012 };
 
             bombilla.Visibility = System.Windows.Visibility.Visible;
-            
-            
 
             if (!tocada[0])
             {
@@ -903,17 +966,23 @@ namespace NPIKinectv2
 
                 if (frame != null)
                 {
-                    // BodyFrame está disponible
+                    /// <summary>
+                    /// BodyFrame está disponible.
+                    /// </summary>
                     using (frame)
                     {
                         using (DrawingContext dc = this.drawingGroup.Open())
                         {
-                            // Dibujamos un fondo transparente para fijar el tamaño del render
 
+                            /// <summary>
+                            /// Dibujamos un fondo transparente para fijar el tamaño del render.
+                            /// </summary>
                             dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
 
-                            // La primera vez que se llama, Kinect alojará cada cuerpo en el array.
-                            // Mientras estos objetos del cuerpo no se desechen o no se pongan a null en el array, se pueden volver a suar .
+                            /// <summary>
+                            /// La primera vez que se llama, Kinect alojará cada cuerpo en el array.
+                            /// Mientras estos objetos del cuerpo no se desechen o no se pongan a null en el array, se pueden volver a suar 
+                            /// </summary>
                             frame.GetAndRefreshBodyData(this.bodies);
 
                             foreach (Body body in this.bodies)
@@ -926,7 +995,9 @@ namespace NPIKinectv2
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 
-                                    // convierte los puntos de union de profuncidad (pantalla) del espacio
+                                    /// <summary>
+                                    /// Convierte los puntos de union de profuncidad (pantalla) del espacio.
+                                    /// </summary>
                                     var jointPoints = new Dictionary<JointType, Point>();
                                     foreach (JointType jointType in joints.Keys)
                                     {
@@ -941,17 +1012,22 @@ namespace NPIKinectv2
                                 }
                             }
 
-                            // impide dibujar fuera del area del render
+                            /// <summary>
+                            /// Impide dibujar fuera del area del render.
+                            /// </summary>
                             this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
                             bodyImage = new Image { Source = new DrawingImage(drawingGroup), Width = this.displayWidth, Height = this.displayHeight };
                             rootGrid.Children.Clear();
 
+                            /// <summary>
+                            /// Añade el cuerpo a la imagen si el flag está activado.
+                            /// </summary>
                             if (skeletonFlag)
-                                                            {
+                            {
                                 rootGrid.Children.Add(bodyImage);
                                 rootGrid.Measure(new Size(bodyImage.Width, bodyImage.Height));
                                 rootGrid.Arrange(new Rect(0, 0, bodyImage.Width, bodyImage.Height));
-                                                            }
+                            }
 
 
                             _bodySourceRTB.Clear();
@@ -965,15 +1041,21 @@ namespace NPIKinectv2
             }
             catch (Exception)
             {
-                // ignoramos si los frame no esta disponible
+                /// <summary>
+                /// ignoramos si los frame no esta disponible.
+                /// </summary>
             }
         }
 
         private void DrawBody(IReadOnlyDictionary<JointType, Joint> joints, IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext)
         {
-            // Dibujamos los huesos
+            /// <summary>
+            /// Dibujamos los huesos.
+            /// </summary>
 
-            // Torso
+            /// <summary>
+            /// Torso.
+            /// </summary>
             this.DrawBone(joints, jointPoints, JointType.Head, JointType.Neck, drawingContext);
             cabeza = jointPoints[JointType.Head];
             this.DrawBone(joints, jointPoints, JointType.Neck, JointType.SpineShoulder, drawingContext);
@@ -984,7 +1066,9 @@ namespace NPIKinectv2
             this.DrawBone(joints, jointPoints, JointType.SpineBase, JointType.HipRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.SpineBase, JointType.HipLeft, drawingContext);
 
-            // Brazo derecho   
+            /// <summary>
+            /// Brazo derecho.
+            /// </summary>
             this.DrawBone(joints, jointPoints, JointType.ShoulderRight, JointType.ElbowRight, drawingContext);
             hombroDerecho = jointPoints[JointType.ShoulderRight];
             this.DrawBone(joints, jointPoints, JointType.ElbowRight, JointType.WristRight, drawingContext);
@@ -993,7 +1077,9 @@ namespace NPIKinectv2
             manoDerecha = jointPoints[JointType.HandRight];
             this.DrawBone(joints, jointPoints, JointType.WristRight, JointType.ThumbRight, drawingContext);
 
-            // Brazo izquierdo
+            /// <summary>
+            /// Brazo izquierdo.
+            /// </summary>
             this.DrawBone(joints, jointPoints, JointType.ShoulderLeft, JointType.ElbowLeft, drawingContext);
             hombroIzquierdo = jointPoints[JointType.ShoulderLeft];
             this.DrawBone(joints, jointPoints, JointType.ElbowLeft, JointType.WristLeft, drawingContext);
@@ -1002,19 +1088,25 @@ namespace NPIKinectv2
             this.DrawBone(joints, jointPoints, JointType.HandLeft, JointType.HandTipLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.WristLeft, JointType.ThumbLeft, drawingContext);
 
-            // Pierna derecha
+            /// <summary>
+            /// Pierna derecha.
+            /// </summary>
             this.DrawBone(joints, jointPoints, JointType.HipRight, JointType.KneeRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.KneeRight, JointType.AnkleRight, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.AnkleRight, JointType.FootRight, drawingContext);
             pieDerecho = jointPoints[JointType.AnkleRight];
 
-            // Pierna izquierda
+            /// <summary>
+            /// Pierna izquierda.
+            /// </summary>
             this.DrawBone(joints, jointPoints, JointType.HipLeft, JointType.KneeLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.KneeLeft, JointType.AnkleLeft, drawingContext);
             this.DrawBone(joints, jointPoints, JointType.AnkleLeft, JointType.FootLeft, drawingContext);
             pieIzquierdo = jointPoints[JointType.AnkleLeft];
 
-            // Dibujamos las uniones
+            /// <summary>
+            /// Dibujamos las uniones.
+            /// </summary>
             foreach (JointType jointType in joints.Keys)
             {
                 Brush drawBrush = null;
@@ -1050,21 +1142,27 @@ namespace NPIKinectv2
             Joint joint0 = joints[jointType0];
             Joint joint1 = joints[jointType1];
 
-            // Si no podemos encontrar alguno de las uniones, salimos
+            /// <summary>
+            /// Si no podemos encontrar alguno de las uniones, salimos.
+            /// </summary>
             if (joint0.TrackingState == TrackingState.NotTracked ||
                 joint1.TrackingState == TrackingState.NotTracked)
             {
                 return;
             }
 
-            // No dibujamos si cada punto fue inferido
+            /// <summary>
+            /// No dibujamos si cada punto fue inferido.
+            /// </summary>
             if (joint0.TrackingState == TrackingState.Inferred &&
                 joint1.TrackingState == TrackingState.Inferred)
             {
                 return;
             }
 
-            // Asumimos que todos los huesos han sido inferidos a menos que se rastreen ambas articulaciones 
+            /// <summary>
+            /// Asumimos que todos los huesos han sido inferidos a menos que se rastreen ambas articulaciones.
+            /// </summary>
             Pen drawPen = this.inferredBonePen;
             if ((joint0.TrackingState == TrackingState.Tracked) && (joint1.TrackingState == TrackingState.Tracked))
             {
@@ -1075,7 +1173,7 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Dibujamos un simbolo de la mano is se produce: círculo rojo = cerrada, verde = abierta, azul = señalando
+        /// Dibujamos un simbolo de la mano is se produce: círculo rojo = cerrada, verde = abierta, azul = señalando.
         /// </summary>
         /// <param name="handState">estado de la mano</param>
         /// <param name="handPosition">posición de la mano</param>
@@ -1099,7 +1197,7 @@ namespace NPIKinectv2
         }
 
         /// <summary>
-        /// Dibujar los indicadores de los bordes si el cuerpo los pisa
+        /// Dibujar los indicadores de los bordes si el cuerpo los pisa.
         /// </summary>
         /// <param name="body">cuerpo para dibujar la información</param>
         /// <param name="drawingContext">Dibujamos el contesto para dibujar</param>

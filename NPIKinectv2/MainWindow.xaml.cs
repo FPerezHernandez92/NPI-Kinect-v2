@@ -39,6 +39,7 @@ namespace NPIKinectv2
         bool[] botonesmenu = { true, false, false ,false};
 
         int segundos = 0;
+        int mejor_tiempo = 999999;
         DateTime dt;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
@@ -284,7 +285,19 @@ namespace NPIKinectv2
                     ||
                     (((int)manoIzquierda.Y > (posY - (posY * precision))) && ((int)manoIzquierda.Y < (posY + (posY * precision)))))
                 {
-                    if (i == 1)
+                    if (i == 0)
+                    {
+                        botonesmenu[0] = true;
+                        botonesmenu[1] = false;
+                        botonesmenu[2] = false;
+                        botonesmenu[3] = false;
+                        if (segundos < mejor_tiempo )
+                            mejor_tiempo = segundos;
+                        mejorpuntuacion.Text = mejor_tiempo.ToString();
+                        segundos = 0;
+                        
+                    }
+                    else if (i == 1)
                     {
                         botonesmenu[0] = false;
                         botonesmenu[1] = true;
@@ -303,10 +316,6 @@ namespace NPIKinectv2
                     }
                     else if (i==3)
                     {
-                        botonesmenu[0] = false;
-                        botonesmenu[1] = false;
-                        botonesmenu[2] = false;
-                        botonesmenu[3] = true;
                         Environment.Exit(1);
                     }
                 }
@@ -319,10 +328,10 @@ namespace NPIKinectv2
             play.Visibility = System.Windows.Visibility.Visible;
             cancel.Visibility = System.Windows.Visibility.Visible;
             settings.Visibility = System.Windows.Visibility.Visible;
+            refresh.Visibility = System.Windows.Visibility.Hidden;
             tocarBotonMenu(912 + 50, 171 + 50, 1); //play
             tocarBotonMenu(1251 + 50, 312 + 50, 3); //options
             tocarBotonMenu(575 + 50, 312 + 50, 2); //cancel
-
 
             //poner el puño cerrado
         }
@@ -333,6 +342,10 @@ namespace NPIKinectv2
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
+
+            refresh.Visibility = System.Windows.Visibility.Visible;
+            tocarBotonMenu(1171 + 50, 180 + 50, 0);  //refresh
+
             //  Modificar precisión y margenes.
             // Boton de volver a Menu inicial.
         }
@@ -341,8 +354,9 @@ namespace NPIKinectv2
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             segundos++;
-            CronoText.Text = dt.AddSeconds(segundos).ToString("ss");
+            CronoText.Text = dt.AddSeconds(segundos).ToString("mm:ss");
         }
+
 
 
         private void IniciarJuego()
@@ -454,7 +468,8 @@ namespace NPIKinectv2
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
-            ganaste.Visibility = System.Windows.Visibility.Hidden;
+
+            refresh.Visibility = System.Windows.Visibility.Hidden;
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();
@@ -703,6 +718,8 @@ namespace NPIKinectv2
                                                 bombilla.Visibility = System.Windows.Visibility.Hidden;
                                                 MovimientoText.Text = "Ganaste";
                                                 dispatcherTimer.Stop();
+                                                refresh.Visibility = System.Windows.Visibility.Visible;
+                                                tocarBotonMenu(1171+50, 180 + 50, 0);  //refresh
                                             }
                                         }
                                     }

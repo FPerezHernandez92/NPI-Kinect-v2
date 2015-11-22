@@ -28,9 +28,9 @@ namespace NPIKinectv2
         /// <summary>
         /// Porcenaje de error que vamos a admitir.
         /// </summary>
-        double porcH = 0.15;
-        double porcV = 0.15;
-        double porcIni = 0.15;
+        double porcentaje_alto = 0.10;
+        double porcentaje_bajo = 0.10;
+        double porcentaje_lados = 0.10;
 
         /// <summary>
         /// Tamaño de los pixel RGB en el bitmap
@@ -226,44 +226,44 @@ namespace NPIKinectv2
             teclaMenosMargenIni.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
 
         }
-
+        
         // Añadimos funciones a realizar con hotkeys.
         private void masMargenH(object sender, ExecutedRoutedEventArgs e)
         {
-            porcH += 0.05;
-            porcHText.Text = porcH.ToString();
+            porcentaje_alto += 0.05;
+            porcHText.Text = porcentaje_alto.ToString();
         }
 
         private void menosMargenH(object sender, ExecutedRoutedEventArgs e)
         {
-            porcH -= 0.05;
-            porcHText.Text = porcH.ToString();
+            porcentaje_alto -= 0.05;
+            porcHText.Text = porcentaje_alto.ToString();
         }
 
         private void masMargenV(object sender, ExecutedRoutedEventArgs e)
         {
-            porcV += 0.05;
-            porcVText.Text = porcV.ToString();
+            porcentaje_bajo += 0.05;
+            porcVText.Text = porcentaje_bajo.ToString();
         }
 
         private void menosMargenV(object sender, ExecutedRoutedEventArgs e)
         {
-            porcV -= 0.05;
-            porcVText.Text = porcV.ToString();
+            porcentaje_bajo -= 0.05;
+            porcVText.Text = porcentaje_bajo.ToString();
         }
 
         private void masMargenIni(object sender, ExecutedRoutedEventArgs e)
         {
-            porcIni += 0.05;
-            porcIniText.Text = porcIni.ToString();
+            porcentaje_lados += 0.05;
+            porcIniText.Text = porcentaje_lados.ToString();
         }
 
         private void menosMargenIni(object sender, ExecutedRoutedEventArgs e)
         {
-            porcIni -= 0.05;
-            porcIniText.Text = porcIni.ToString();
+            porcentaje_lados -= 0.05;
+            porcIniText.Text = porcentaje_lados.ToString();
         }
-
+        
         /// <summary>
         /// Notificador del manejador de eventos para indicar los cambios en los datos 
         /// </summary>
@@ -309,17 +309,16 @@ namespace NPIKinectv2
             {
                 this.bodyFrameReader.FrameArrived += this.BodyFrameReaderFrameArrived;
             }
-
-            PosicionInicio.Visibility = System.Windows.Visibility.Visible;
+            
             circuloRojo.Visibility = System.Windows.Visibility.Hidden;
             circuloVerde.Visibility = System.Windows.Visibility.Hidden;
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
             InstruccionesText.Text = "Imítame";
 
-            porcHText.Text = porcH.ToString();
-            porcVText.Text = porcV.ToString();
-            porcIniText.Text = porcIni.ToString();
+            porcHText.Text = porcentaje_alto.ToString();
+            porcVText.Text = porcentaje_bajo.ToString();
+            porcIniText.Text = porcentaje_lados.ToString();
 
 
         }
@@ -411,20 +410,63 @@ namespace NPIKinectv2
         private void ControlaPosicion()
         {
             int widthPantallaMin, widthPantallaMax, widthTotal, heightPantallaMin, heightPantallaMax, heightTotal;
-            int manoEjeX = 1236, manoEjeY = 184;
+            int manoEjeX=1171, manoEjeY=156;
+            
 
             //limalt.Text = (this.Width * (porcentaje)).ToString();
             //limder.Text = (this.Width * (1-porcentaje)).ToString();
-            //widthPantallaMin = (int) (this.Width * porcentaje);
-            //widthPantallaMax = (int) (this.Width * (1 - porcentaje));
-            //HE TENIDO QUE MODIFICAR ESTOS VALORES YA QUE NO ME VALIAN LOS DEL XAML
-            widthPantallaMin = 250;
-            widthPantallaMax = 1550;
-            heightPantallaMin = 0;
-            heightPantallaMax = 958;
-            heightTotal = heightPantallaMax - heightPantallaMin;
-            widthTotal = widthPantallaMax - widthPantallaMin;
-            if ((int)cabeza.X < ((widthTotal * porcH) + widthPantallaMin))
+            widthPantallaMin = (int) (this.Width * porcentaje_lados); //minimo en el lateral izquierdo (a la vista)
+            widthPantallaMax = (int) (this.Width * (1 - porcentaje_lados)); //máximo en le lateral derecho (a la vista)
+            heightPantallaMin = (int) (this.Height * porcentaje_alto); //minimo en la cabeza
+            heightPantallaMax = (int) (this.Height * (1- porcentaje_bajo)); //porcentaje en los pies
+            heightTotal = heightPantallaMax - heightPantallaMin; //el máximo disponible a lo alto
+            widthTotal = widthPantallaMax - widthPantallaMin; //el máximo disponible a lo largo
+
+            if ( ((int)cabeza.Y) < heightPantallaMin)
+            {
+                MovimientoText.Text = "Alejate";
+
+                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                flecha1.Visibility = System.Windows.Visibility.Hidden;
+                flecha2.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else if (( ((int)pieDerecho.Y) > heightPantallaMax) || (((int)pieIzquierdo.Y) > heightPantallaMax))
+            {
+                MovimientoText.Text = "Alejate";
+
+                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                flecha1.Visibility = System.Windows.Visibility.Hidden;
+                flecha2.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                if (((int)manoIzquierda.X) < widthPantallaMin)
+                {
+                    MovimientoText.Text = "Muevete al centro";
+
+                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                    flecha1.Visibility = System.Windows.Visibility.Visible;
+                    flecha2.Visibility = System.Windows.Visibility.Visible;
+                }
+                else if (((int)manoDerecha.X) > widthPantallaMax)
+                {
+                    MovimientoText.Text = "Muevete al centro";
+
+                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
+                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
+                    flecha1.Visibility = System.Windows.Visibility.Visible;
+                    flecha2.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    MovimientoText.Text = " ";
+                }
+            }
+
+            /*if ((int)cabeza.X < ((widthTotal * porcH) + widthPantallaMin))
             {
                 MovimientoText.Text = "Muevete al centro";
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
@@ -444,7 +486,7 @@ namespace NPIKinectv2
             }
             else
             {
-                if ((int)pieDerecho.Y > ((heightTotal * (1 - porcV)) + heightPantallaMin))
+                if ((int)pieDerecho.Y > ((heightTotal * (1-porcV)) + heightPantallaMin))
                 {
                     MovimientoText.Text = "Alejate";
                     circuloVerde.Visibility = System.Windows.Visibility.Hidden;
@@ -497,7 +539,7 @@ namespace NPIKinectv2
                         }
                     }
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -533,6 +575,8 @@ namespace NPIKinectv2
                                 if (body.IsTracked)
                                 {
                                     this.DrawClippedEdges(body, dc);
+                                    textderx.Text = manoDerecha.X.ToString();
+                                    textdery.Text = manoDerecha.Y.ToString();
                                     this.ControlaPosicion();
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;

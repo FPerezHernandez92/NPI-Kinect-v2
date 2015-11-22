@@ -314,7 +314,6 @@ namespace NPIKinectv2
             circuloVerde.Visibility = System.Windows.Visibility.Hidden;
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
-            InstruccionesText.Text = "Imítame";
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();
@@ -410,11 +409,7 @@ namespace NPIKinectv2
         private void ControlaPosicion()
         {
             int widthPantallaMin, widthPantallaMax, widthTotal, heightPantallaMin, heightPantallaMax, heightTotal;
-            int manoEjeX=1171, manoEjeY=156;
-            
 
-            //limalt.Text = (this.Width * (porcentaje)).ToString();
-            //limder.Text = (this.Width * (1-porcentaje)).ToString();
             widthPantallaMin = (int) (this.Width * porcentaje_lados); //minimo en el lateral izquierdo (a la vista)
             widthPantallaMax = (int) (this.Width * (1 - porcentaje_lados)); //máximo en le lateral derecho (a la vista)
             heightPantallaMin = (int) (this.Height * porcentaje_alto); //minimo en la cabeza
@@ -465,81 +460,7 @@ namespace NPIKinectv2
                     MovimientoText.Text = " ";
                 }
             }
-
-            /*if ((int)cabeza.X < ((widthTotal * porcH) + widthPantallaMin))
-            {
-                MovimientoText.Text = "Muevete al centro";
-                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-
-                flecha1.Visibility = System.Windows.Visibility.Visible;
-                flecha2.Visibility = System.Windows.Visibility.Visible;
-            }
-            else if ((int)cabeza.X > ((widthTotal * (1 - porcH)) + widthPantallaMin))
-            {
-                MovimientoText.Text = "Muevete al centro";
-                circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-
-                flecha1.Visibility = System.Windows.Visibility.Visible;
-                flecha2.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                if ((int)pieDerecho.Y > ((heightTotal * (1-porcV)) + heightPantallaMin))
-                {
-                    MovimientoText.Text = "Alejate";
-                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-
-                    flecha1.Visibility = System.Windows.Visibility.Hidden;
-                    flecha2.Visibility = System.Windows.Visibility.Hidden;
-                }
-                else if ((int)cabeza.Y < ((heightTotal * (porcV * 2)) + heightPantallaMin))
-                {
-                    MovimientoText.Text = "Alejate";
-                    circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                    circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-
-                    flecha1.Visibility = System.Windows.Visibility.Hidden;
-                    flecha2.Visibility = System.Windows.Visibility.Hidden;
-                }
-                else
-                {
-                    if ((int)manoDerecha.Y > ((int)cabeza.Y))
-                    {
-                        MovimientoText.Text = "Levanta la mano";
-                        circuloRojo.Visibility = System.Windows.Visibility.Visible;
-                        circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-
-                        flecha1.Visibility = System.Windows.Visibility.Hidden;
-                        flecha2.Visibility = System.Windows.Visibility.Hidden;
-                    }
-                    else
-                    {
-                        if (!(
-                            ((int)manoDerecha.X > (manoEjeX - (manoEjeX * porcIni))) && ((int)manoDerecha.X < (manoEjeX + (manoEjeX * porcIni)))
-                            &&
-                            ((int)manoDerecha.Y > (manoEjeY - (manoEjeY * porcIni))) && ((int)manoDerecha.Y < (manoEjeY + (manoEjeY * porcIni)))
-                            ))
-                        {
-                            MovimientoText.Text = "Coloca la mano en el círculo";
-                            circuloVerde.Visibility = System.Windows.Visibility.Visible;
-                            circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-                            flecha1.Visibility = System.Windows.Visibility.Hidden;
-                            flecha2.Visibility = System.Windows.Visibility.Hidden;
-                        }
-                        else
-                        {
-                            MovimientoText.Text = "COMIENZA EL JUEGO";
-                            circuloVerde.Visibility = System.Windows.Visibility.Hidden;
-                            circuloRojo.Visibility = System.Windows.Visibility.Hidden;
-                            flecha1.Visibility = System.Windows.Visibility.Hidden;
-                            flecha2.Visibility = System.Windows.Visibility.Hidden;
-                        }
-                    }
-                }
-            }*/
+            
         }
 
         /// <summary>
@@ -575,8 +496,6 @@ namespace NPIKinectv2
                                 if (body.IsTracked)
                                 {
                                     this.DrawClippedEdges(body, dc);
-                                    textderx.Text = manoDerecha.X.ToString();
-                                    textdery.Text = manoDerecha.Y.ToString();
                                     this.ControlaPosicion();
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;

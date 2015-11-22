@@ -97,5 +97,6 @@
         <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenV}" Executed="menosMargenV"/>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenIni}" Executed="masMargenIni"/>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenIni}" Executed="menosMargenIni"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMostrarEsqueleto}" Executed="mostrarSkeleton"/>
     </Window.CommandBindings>
 </Window>

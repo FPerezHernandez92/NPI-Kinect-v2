@@ -35,6 +35,13 @@ namespace NPIKinectv2
         bool[] tocada = { false, false, false, false, false, false, false, false, false};
         bool colocado = false;
 
+        bool menuInicio = true;
+        bool menuJuego = false;
+        bool menuOpciones = false;
+
+        // Mostrar esqueleto
+       bool skeletonFlag = false;
+
         /// <summary>
         /// Tamaño de los pixel RGB en el bitmap
         /// </summary>
@@ -171,6 +178,8 @@ namespace NPIKinectv2
         public static RoutedCommand teclaMasMargenIni = new RoutedCommand();
         public static RoutedCommand teclaMenosMargenIni = new RoutedCommand();
 
+        public static RoutedCommand teclaMostrarEsqueleto = new RoutedCommand();
+
         /// <summary>
         /// Inicialización de una nueva instancia de la clase MainWindow
         /// </summary>
@@ -228,10 +237,44 @@ namespace NPIKinectv2
             teclaMasMargenIni.InputGestures.Add(new KeyGesture(Key.B, ModifierKeys.Control));
             teclaMenosMargenIni.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
 
+            teclaMostrarEsqueleto.InputGestures.Add(new KeyGesture(Key.M, ModifierKeys.Control));
         }
-        
-        // Añadimos funciones a realizar con hotkeys.
-        private void masMargenH(object sender, ExecutedRoutedEventArgs e)
+
+
+        private void mostrarSkeleton(object sender, ExecutedRoutedEventArgs e)
+        {
+            if( skeletonFlag == false)
+            {
+                skeletonFlag = true;
+            }
+            else
+            {
+                skeletonFlag = false;
+            }
+        }
+
+        private void IniciarMenu()
+        {
+            // Añadir 3 botones uno para cada menu, juego, opciones y salir.
+        }
+
+        private void IniciarOpciones()
+        {
+            //  Modificar precisión y margenes.
+            // Boton de volver a Menu inicial.
+        }
+
+        private void IniciarJuego()
+        {
+            // Meter tiempo, boton para salir a inicio.
+            if (colocado)
+            {
+                this.JuegoAgilidad();
+            }
+        }
+
+// Añadimos funciones a realizar con hotkeys.
+private void masMargenH(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_alto += 0.05;
             porcHText.Text = porcentaje_alto.ToString();
@@ -436,7 +479,6 @@ namespace NPIKinectv2
                 MovimientoText.Text = "Alejate";
                 colocado = false;
 
-
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
                 flecha1.Visibility = System.Windows.Visibility.Hidden;
@@ -446,6 +488,7 @@ namespace NPIKinectv2
             {
                 if (((int)manoIzquierda.X) < widthPantallaMin)
                 {
+
                     MovimientoText.Text = "Muevete al centro";
                     colocado = false;
 
@@ -631,9 +674,15 @@ namespace NPIKinectv2
                             this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
                             bodyImage = new Image { Source = new DrawingImage(drawingGroup), Width = this.displayWidth, Height = this.displayHeight };
                             rootGrid.Children.Clear();
-                            rootGrid.Children.Add(bodyImage);
-                            rootGrid.Measure(new Size(bodyImage.Width, bodyImage.Height));
-                            rootGrid.Arrange(new Rect(0, 0, bodyImage.Width, bodyImage.Height));
+
+                            if (skeletonFlag)
+                                                            {
+                                rootGrid.Children.Add(bodyImage);
+                                rootGrid.Measure(new Size(bodyImage.Width, bodyImage.Height));
+                                rootGrid.Arrange(new Rect(0, 0, bodyImage.Width, bodyImage.Height));
+                                                            }
+
+
                             _bodySourceRTB.Clear();
                             _bodySourceRTB.Render(rootGrid);
                             _bodySourceRTB.CopyPixels(this.bodyBytespixels, displayWidth * this.bytesPerPixel,

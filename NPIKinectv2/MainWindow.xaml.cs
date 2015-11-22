@@ -41,6 +41,8 @@ namespace NPIKinectv2
         int segundos = 0;
         int mejor_tiempo = 999999;
         DateTime dt;
+
+        bool activado = false;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
 
@@ -353,7 +355,6 @@ namespace NPIKinectv2
                                 botonesmenu[2] = true;
                                 botonesmenu[3] = false;
                                 break;
-
                         }
                         switch (handStateright)
                         {
@@ -391,11 +392,96 @@ namespace NPIKinectv2
             cancel.Visibility = System.Windows.Visibility.Visible;
             settings.Visibility = System.Windows.Visibility.Visible;
             refresh.Visibility = System.Windows.Visibility.Hidden;
+
+            precision = 0.03;
+
+
+            slider.Visibility = System.Windows.Visibility.Hidden;
+            difitex1.Visibility = System.Windows.Visibility.Hidden;
+            difitex2.Visibility = System.Windows.Visibility.Hidden;
+            difitex3.Visibility = System.Windows.Visibility.Hidden;
+            difitex4.Visibility = System.Windows.Visibility.Hidden;
+
+
             tocarBotonMenu(912 + 50, 171 + 50, 1, handStateleft, handStateright); //play
             tocarBotonMenu(1251 + 50, 312 + 50, 3, handStateleft, handStateright); //options
             tocarBotonMenu(575 + 50, 312 + 50, 2, handStateleft, handStateright); //cancel
 
             //poner el puño cerrado
+        }
+
+        private void controlarSlider(int posX, int posY, HandState handStateleft, HandState handStateright)
+        {
+            if ((((int)manoDerecha.X > (posX - (300))) && ((int)manoDerecha.X < (posX + (300))))
+                ||
+                (((int)manoIzquierda.X > (posX - (300))) && ((int)manoIzquierda.X < (posX + (300)))))
+            {
+                //if ((((int)manoDerecha.Y > (posY - (posY * precision*2))) && ((int)manoDerecha.Y < (posY + (posY * precision*2))))
+                   // ||
+                   // (((int)manoIzquierda.Y > (posY - (posY * precision*2))) && ((int)manoIzquierda.Y < (posY + (posY * precision*2)))))
+                //{
+                    switch (handStateleft)
+                    {
+                        case HandState.Closed:
+                            
+                            if (slider.Value == 0 && ( ((int)manoIzquierda.X > 647) && ((int)manoIzquierda.X < 847) ) )
+                            {
+                                activado = true;
+                            }
+                            if (slider.Value == 1 && (((int)manoIzquierda.X > 847) && ((int)manoIzquierda.X < 1047)))
+                            {
+                                activado = true;
+                            }
+                            if (slider.Value == 2 && (((int)manoIzquierda.X > 1047) && ((int)manoIzquierda.X < 1247)))
+                            {
+                                activado = true;
+                            }
+                            if (activado && (((int)manoIzquierda.X < 847)))
+                            {
+                                slider.Value = 0;
+                            }
+                            if (activado && (((int)manoIzquierda.X > 847) && ((int)manoIzquierda.X < 1047)))
+                            {
+                                slider.Value = 1;
+                            }
+                            if (activado && ((int)manoIzquierda.X > 1047))
+                            {
+                                slider.Value = 2;
+                            }
+                            break;
+                    }
+                    switch (handStateright)
+                    {
+                        case HandState.Closed:
+                            if (slider.Value == 0 && (((int)manoDerecha.X > 647) && ((int)manoDerecha.X < 847)))
+                            {
+                                activado = true;
+                            }
+                            if (slider.Value == 1 && (((int)manoDerecha.X > 847) && ((int)manoDerecha.X < 1047)))
+                            {
+                                activado = true;
+                            }
+                            if (slider.Value == 2 && (((int)manoDerecha.X > 1047) && ((int)manoDerecha.X < 1247)))
+                            {
+                                activado = true;
+                            }
+                            if (activado && ( ((int)manoDerecha.X < 847)))
+                            {
+                                slider.Value = 0;
+                            }
+                            if (activado && (((int)manoDerecha.X > 847) && ((int)manoDerecha.X < 1047)))
+                            {
+                                slider.Value = 1;
+                            }
+                            if (activado && (((int)manoDerecha.X > 1047) ))
+                            {
+                                slider.Value = 2;
+                            }
+                            break;
+                    }
+                //}
+            }
+
         }
 
         private void IniciarOpciones(HandState handStateleft, HandState handStateright)
@@ -405,11 +491,17 @@ namespace NPIKinectv2
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
 
+
+            slider.Visibility = System.Windows.Visibility.Visible;
+            difitex1.Visibility = System.Windows.Visibility.Visible;
+            difitex2.Visibility = System.Windows.Visibility.Visible;
+            difitex3.Visibility = System.Windows.Visibility.Visible;
+            difitex4.Visibility = System.Windows.Visibility.Visible;
+
             refresh.Visibility = System.Windows.Visibility.Visible;
             tocarBotonMenu(1171 + 50, 180 + 50, 0,handStateleft, handStateright);  //refresh
 
-
-
+            controlarSlider(251+713+50,479+50,handStateleft, handStateright);
 
             // Modificar precisión y margenes.
             // Boton de volver a Menu inicial.
@@ -429,7 +521,9 @@ namespace NPIKinectv2
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
 
-            
+            if (slider.Value == 0) precision = 0.04;
+            else if (slider.Value == 2) precision = 0.02;
+            else precision = 0.03;
 
 
             if (colocado)
@@ -534,6 +628,12 @@ namespace NPIKinectv2
             settings.Visibility = System.Windows.Visibility.Hidden;
 
             refresh.Visibility = System.Windows.Visibility.Hidden;
+
+            slider.Visibility = System.Windows.Visibility.Hidden;
+            difitex1.Visibility = System.Windows.Visibility.Hidden;
+            difitex2.Visibility = System.Windows.Visibility.Hidden;
+            difitex3.Visibility = System.Windows.Visibility.Hidden;
+            difitex4.Visibility = System.Windows.Visibility.Hidden;
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();

@@ -103,6 +103,23 @@
         </TextBlock>
         <Image x:Name="refresh" Margin="1171,180,656,9980" Source="refresh.png" Stretch="Fill" Width="65" Height="65"/>
         <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="0,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="94" Width="154" FontSize="64" Background="Transparent"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="656,524,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.5,0.5" SmallChange="0" Width="590" Maximum="2" TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="False" Value="1" Background="Transparent">
+            <Slider.LayoutTransform>
+                <ScaleTransform ScaleY="3" CenterX="15" CenterY="15"/>
+            </Slider.LayoutTransform>
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="179.672"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <TextBlock x:Name="difitex1" HorizontalAlignment="Left" Margin="640,530,0,0" TextWrapping="Wrap" Text="Fácil" VerticalAlignment="Top" FontSize="26.667"/>
+        <TextBlock x:Name="difitex2" HorizontalAlignment="Left" Margin="912,530,0,0" TextWrapping="Wrap" Text="Media" VerticalAlignment="Top" FontSize="26.667"/>
+        <TextBlock x:Name="difitex3" HorizontalAlignment="Left" Margin="1202,530,0,0" TextWrapping="Wrap" Text="Dificil" VerticalAlignment="Top" FontSize="26.667"/>
+        <TextBlock x:Name="difitex4" HorizontalAlignment="Left" Margin="885,440,0,0" TextWrapping="Wrap" Text="DIFICULTAD" VerticalAlignment="Top" FontSize="26.667"/>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

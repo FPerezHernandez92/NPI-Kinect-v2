@@ -259,23 +259,23 @@ namespace NPIKinectv2
             }
         }
 
-        private void Interfaz()
+        private void Interfaz(HandState handStateleft, HandState handStateright)
         {
             if (botonesmenu[0])
             {
-                this.IniciarMenu();
+                this.IniciarMenu(handStateleft, handStateright);
             }
             else if (botonesmenu[1])
             {
-                this.IniciarJuego();
+                this.IniciarJuego(handStateleft, handStateright);
             }
             else if (botonesmenu[2])
             {
-                this.IniciarOpciones();
+                this.IniciarOpciones(handStateleft, handStateright);
             }
         }
 
-        void tocarBotonMenu(int posX, int posY, int i)
+        void tocarBotonMenu(int posX, int posY, int i, HandState handStateleft, HandState handStateright)
         {
             if ((((int)manoDerecha.X > (posX - (posX * precision))) && ((int)manoDerecha.X < (posX + (posX * precision))))
                 ||
@@ -287,56 +287,118 @@ namespace NPIKinectv2
                 {
                     if (i == 0)
                     {
-                        botonesmenu[0] = true;
-                        botonesmenu[1] = false;
-                        botonesmenu[2] = false;
-                        botonesmenu[3] = false;
-                        if (segundos < mejor_tiempo )
-                            mejor_tiempo = segundos;
-                        mejorpuntuacion.Text = mejor_tiempo.ToString();
-                        segundos = 0;
-                        
+                        switch (handStateleft)
+                        {
+                            case HandState.Closed:
+                                botonesmenu[0] = true;
+                                botonesmenu[1] = false;
+                                botonesmenu[2] = false;
+                                botonesmenu[3] = false;
+                                if (segundos < mejor_tiempo)
+                                    mejor_tiempo = segundos;
+                                mejorpuntuacion.Text = mejor_tiempo.ToString();
+                                segundos = 0;
+                                break;
+                        }
+                        switch (handStateright)
+                        {
+                            case HandState.Closed:
+                                botonesmenu[0] = true;
+                                botonesmenu[1] = false;
+                                botonesmenu[2] = false;
+                                botonesmenu[3] = false;
+                                if (segundos < mejor_tiempo)
+                                    mejor_tiempo = segundos;
+                                mejorpuntuacion.Text = mejor_tiempo.ToString();
+                                segundos = 0;
+                                break;
+                        }
+
+
                     }
                     else if (i == 1)
                     {
-                        botonesmenu[0] = false;
-                        botonesmenu[1] = true;
-                        botonesmenu[2] = false;
-                        botonesmenu[3] = false;
-                        dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-                        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-                        dispatcherTimer.Start();
+                        switch (handStateleft)
+                        {
+                            case HandState.Closed:
+                                botonesmenu[0] = false;
+                                botonesmenu[1] = true;
+                                botonesmenu[2] = false;
+                                botonesmenu[3] = false;
+                                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                                dispatcherTimer.Start();
+                                break;
+                        }
+                        switch (handStateright)
+                        {
+                            case HandState.Closed:
+                                botonesmenu[0] = false;
+                                botonesmenu[1] = true;
+                                botonesmenu[2] = false;
+                                botonesmenu[3] = false;
+                                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                                dispatcherTimer.Start();
+                                break;
+                        }
                     }
                     else if (i == 2)
                     {
-                        botonesmenu[0] = false;
-                        botonesmenu[1] = false;
-                        botonesmenu[2] = true;
-                        botonesmenu[3] = false;
+                        switch (handStateleft)
+                        {
+                            case HandState.Closed:
+                                botonesmenu[0] = false;
+                                botonesmenu[1] = false;
+                                botonesmenu[2] = true;
+                                botonesmenu[3] = false;
+                                break;
+
+                        }
+                        switch (handStateright)
+                        {
+                            case HandState.Closed:
+                                botonesmenu[0] = false;
+                                botonesmenu[1] = false;
+                                botonesmenu[2] = true;
+                                botonesmenu[3] = false;
+                                break;
+                        }
                     }
-                    else if (i==3)
+                    else if (i == 3)
                     {
-                        Environment.Exit(1);
+                        switch (handStateleft)
+                        {
+                            case HandState.Closed:
+                                Environment.Exit(1);
+                                break;
+                        }
+                        switch (handStateright)
+                        {
+                            case HandState.Closed:
+                                Environment.Exit(1);
+                                break;
+                        }
                     }
                 }
             }
         }
 
-
-        private void IniciarMenu()
+        
+        private void IniciarMenu(HandState handStateleft, HandState handStateright)
         {
             play.Visibility = System.Windows.Visibility.Visible;
             cancel.Visibility = System.Windows.Visibility.Visible;
             settings.Visibility = System.Windows.Visibility.Visible;
             refresh.Visibility = System.Windows.Visibility.Hidden;
-            tocarBotonMenu(912 + 50, 171 + 50, 1); //play
-            tocarBotonMenu(1251 + 50, 312 + 50, 3); //options
-            tocarBotonMenu(575 + 50, 312 + 50, 2); //cancel
+            tocarBotonMenu(912 + 50, 171 + 50, 1, handStateleft, handStateright); //play
+            tocarBotonMenu(1251 + 50, 312 + 50, 3, handStateleft, handStateright); //options
+            tocarBotonMenu(575 + 50, 312 + 50, 2, handStateleft, handStateright); //cancel
 
             //poner el puño cerrado
         }
 
-        private void IniciarOpciones()
+        private void IniciarOpciones(HandState handStateleft, HandState handStateright)
         {
             MovimientoText.Text = "en opciones";
             play.Visibility = System.Windows.Visibility.Hidden;
@@ -344,9 +406,12 @@ namespace NPIKinectv2
             settings.Visibility = System.Windows.Visibility.Hidden;
 
             refresh.Visibility = System.Windows.Visibility.Visible;
-            tocarBotonMenu(1171 + 50, 180 + 50, 0);  //refresh
+            tocarBotonMenu(1171 + 50, 180 + 50, 0,handStateleft, handStateright);  //refresh
 
-            //  Modificar precisión y margenes.
+
+
+
+            // Modificar precisión y margenes.
             // Boton de volver a Menu inicial.
         }
 
@@ -358,8 +423,7 @@ namespace NPIKinectv2
         }
 
 
-
-        private void IniciarJuego()
+        private void IniciarJuego(HandState handStateleft, HandState handStateright)
         {
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
@@ -370,7 +434,7 @@ namespace NPIKinectv2
 
             if (colocado)
             {
-                this.JuegoAgilidad();
+                this.JuegoAgilidad(handStateleft,handStateright);
             }
         }
 
@@ -641,7 +705,7 @@ namespace NPIKinectv2
         }
         
         
-        private void JuegoAgilidad()
+        private void JuegoAgilidad(HandState handStateleft, HandState handStateright)
         {
             //Añadir contador de tiempo y de puntos
             //De momento solo van a salir 8 pelotas 
@@ -719,7 +783,7 @@ namespace NPIKinectv2
                                                 MovimientoText.Text = "Ganaste";
                                                 dispatcherTimer.Stop();
                                                 refresh.Visibility = System.Windows.Visibility.Visible;
-                                                tocarBotonMenu(1171+50, 180 + 50, 0);  //refresh
+                                                tocarBotonMenu(1171+50, 180 + 50, 0, handStateleft, handStateright);  //refresh
                                             }
                                         }
                                     }
@@ -765,7 +829,7 @@ namespace NPIKinectv2
                                 {
                                     this.DrawClippedEdges(body, dc);
                                     this.ControlaPosicion();
-                                    this.Interfaz();
+                                    this.Interfaz(body.HandLeftState,body.HandRightState);
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 

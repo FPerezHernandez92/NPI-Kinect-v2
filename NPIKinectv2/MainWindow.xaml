@@ -89,6 +89,9 @@
             </TextBlock.Background>
         </TextBlock>
         <Image x:Name="bombilla" Margin="1346,396,481,9704" Source="bombilla.png" Stretch="Fill" Width="65" Height="90"/>
+        <Image x:Name="play" Margin="912,171,915,9971" Source="play.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="cancel" Margin="1251,312,576,9847" Source="cancel.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="settings" Margin="575,312,1252,9847" Source="settings.png" Stretch="Fill" Width="65" Height="65"/>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

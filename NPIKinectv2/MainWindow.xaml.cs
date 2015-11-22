@@ -35,9 +35,7 @@ namespace NPIKinectv2
         bool[] tocada = { false, false, false, false, false, false, false, false, false};
         bool colocado = false;
 
-        bool menuInicio = true;
-        bool menuJuego = false;
-        bool menuOpciones = false;
+        bool[] botonesmenu = { true, false, false };
 
         // Mostrar esqueleto
        bool skeletonFlag = false;
@@ -253,19 +251,83 @@ namespace NPIKinectv2
             }
         }
 
+        private void Interfaz()
+        {
+            
+            if (botonesmenu[0])
+            {
+                this.IniciarMenu();
+            }
+            else if (botonesmenu[1])
+            {
+                this.IniciarJuego();
+            }
+            else if (botonesmenu[2])
+            {
+                this.IniciarOpciones();
+            }
+        }
+
+        void tocarBotonMenu(int posX, int posY, int i)
+        {
+            if ((((int)manoDerecha.X > (posX - (posX * precision))) && ((int)manoDerecha.X < (posX + (posX * precision))))
+                ||
+                (((int)manoIzquierda.X > (posX - (posX * precision))) && ((int)manoIzquierda.X < (posX + (posX * precision)))))
+            {
+                if ((((int)manoDerecha.Y > (posY - (posY * precision))) && ((int)manoDerecha.Y < (posY + (posY * precision))))
+                    ||
+                    (((int)manoIzquierda.Y > (posY - (posY * precision))) && ((int)manoIzquierda.Y < (posY + (posY * precision)))))
+                {
+                    if (i == 0)
+                    {
+                        botonesmenu[0] = true;
+                        botonesmenu[1] = false;
+                        botonesmenu[2] = false;
+                    }
+                    else if (i == 1)
+                    {
+                        botonesmenu[0] = false;
+                        botonesmenu[1] = true;
+                        botonesmenu[2] = false;
+                    }
+                    else if (i==2)
+                    {
+                        botonesmenu[0] = false;
+                        botonesmenu[1] = false;
+                        botonesmenu[2] = true;
+                    }
+                }
+            }
+        }
+
+
         private void IniciarMenu()
         {
+            play.Visibility = System.Windows.Visibility.Visible;
+            cancel.Visibility = System.Windows.Visibility.Visible;
+            settings.Visibility = System.Windows.Visibility.Visible;
+            tocarBotonMenu(912 + 50, 171 + 50, 0); //play
+            tocarBotonMenu(1251 + 50, 312 + 50, 1); //settings
+            tocarBotonMenu(575 + 50, 312 + 50, 2); //cancel
             // Añadir 3 botones uno para cada menu, juego, opciones y salir.
         }
 
         private void IniciarOpciones()
         {
+            MovimientoText.Text = "en opciones";
+
+            play.Visibility = System.Windows.Visibility.Hidden;
+            cancel.Visibility = System.Windows.Visibility.Hidden;
+            settings.Visibility = System.Windows.Visibility.Hidden;
             //  Modificar precisión y margenes.
             // Boton de volver a Menu inicial.
         }
 
         private void IniciarJuego()
         {
+            play.Visibility = System.Windows.Visibility.Hidden;
+            cancel.Visibility = System.Windows.Visibility.Hidden;
+            settings.Visibility = System.Windows.Visibility.Hidden;
             // Meter tiempo, boton para salir a inicio.
             if (colocado)
             {
@@ -351,21 +413,27 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
                 this.colorFrameReader.FrameArrived += this.ColorFrameReaderFrameArrived;
             }
 
+            
+
             if (this.bodyFrameReader != null)
             {
                 this.bodyFrameReader.FrameArrived += this.BodyFrameReaderFrameArrived;
             }
-            
+
             circuloRojo.Visibility = System.Windows.Visibility.Hidden;
             circuloVerde.Visibility = System.Windows.Visibility.Hidden;
             flecha1.Visibility = System.Windows.Visibility.Hidden;
             flecha2.Visibility = System.Windows.Visibility.Hidden;
             bombilla.Visibility = System.Windows.Visibility.Hidden;
+            play.Visibility = System.Windows.Visibility.Hidden;
+            cancel.Visibility = System.Windows.Visibility.Hidden;
+            settings.Visibility = System.Windows.Visibility.Hidden;
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();
             porcIniText.Text = porcentaje_lados.ToString();
 
+            
 
         }
 
@@ -488,7 +556,6 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
             {
                 if (((int)manoIzquierda.X) < widthPantallaMin)
                 {
-
                     MovimientoText.Text = "Muevete al centro";
                     colocado = false;
 
@@ -651,7 +718,7 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
                                 {
                                     this.DrawClippedEdges(body, dc);
                                     this.ControlaPosicion();
-                                    if (colocado) this.JuegoAgilidad();
+                                    this.Interfaz();
 
                                     IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 

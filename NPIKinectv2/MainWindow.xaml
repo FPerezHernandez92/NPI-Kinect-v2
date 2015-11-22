@@ -92,6 +92,16 @@
         <Image x:Name="play" Margin="912,171,915,9971" Source="play.png" Stretch="Fill" Width="65" Height="65"/>
         <Image x:Name="cancel" Margin="1251,312,576,9847" Source="cancel.png" Stretch="Fill" Width="65" Height="65"/>
         <Image x:Name="settings" Margin="575,312,1252,9847" Source="settings.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="ganaste" Margin="740,100,726,9938" Source="lop-ganaste.gif" Stretch="Fill"/>
+        <Label Name="lblTime" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="CronoText" HorizontalAlignment="Left" Margin="241,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="69" Width="201" FontSize="24" FontWeight="Bold">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

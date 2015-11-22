@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.Kinect;
 using System.Collections.Generic;
+using System.Windows.Threading;
 
 namespace NPIKinectv2
 {
@@ -35,10 +36,16 @@ namespace NPIKinectv2
         bool[] tocada = { false, false, false, false, false, false, false, false, false};
         bool colocado = false;
 
-        bool[] botonesmenu = { true, false, false };
+        bool[] botonesmenu = { true, false, false ,false};
+
+        int segundos = 0;
+        DateTime dt;
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+
+
 
         // Mostrar esqueleto
-       bool skeletonFlag = false;
+        bool skeletonFlag = false;
 
         /// <summary>
         /// Tamaño de los pixel RGB en el bitmap
@@ -253,7 +260,6 @@ namespace NPIKinectv2
 
         private void Interfaz()
         {
-            
             if (botonesmenu[0])
             {
                 this.IniciarMenu();
@@ -278,23 +284,30 @@ namespace NPIKinectv2
                     ||
                     (((int)manoIzquierda.Y > (posY - (posY * precision))) && ((int)manoIzquierda.Y < (posY + (posY * precision)))))
                 {
-                    if (i == 0)
-                    {
-                        botonesmenu[0] = true;
-                        botonesmenu[1] = false;
-                        botonesmenu[2] = false;
-                    }
-                    else if (i == 1)
+                    if (i == 1)
                     {
                         botonesmenu[0] = false;
                         botonesmenu[1] = true;
                         botonesmenu[2] = false;
+                        botonesmenu[3] = false;
+                        dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                        dispatcherTimer.Start();
                     }
-                    else if (i==2)
+                    else if (i == 2)
                     {
                         botonesmenu[0] = false;
                         botonesmenu[1] = false;
                         botonesmenu[2] = true;
+                        botonesmenu[3] = false;
+                    }
+                    else if (i==3)
+                    {
+                        botonesmenu[0] = false;
+                        botonesmenu[1] = false;
+                        botonesmenu[2] = false;
+                        botonesmenu[3] = true;
+                        Environment.Exit(1);
                     }
                 }
             }
@@ -306,16 +319,17 @@ namespace NPIKinectv2
             play.Visibility = System.Windows.Visibility.Visible;
             cancel.Visibility = System.Windows.Visibility.Visible;
             settings.Visibility = System.Windows.Visibility.Visible;
-            tocarBotonMenu(912 + 50, 171 + 50, 0); //play
-            tocarBotonMenu(1251 + 50, 312 + 50, 1); //settings
+            tocarBotonMenu(912 + 50, 171 + 50, 1); //play
+            tocarBotonMenu(1251 + 50, 312 + 50, 3); //options
             tocarBotonMenu(575 + 50, 312 + 50, 2); //cancel
-            // Añadir 3 botones uno para cada menu, juego, opciones y salir.
+
+
+            //poner el puño cerrado
         }
 
         private void IniciarOpciones()
         {
             MovimientoText.Text = "en opciones";
-
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
@@ -323,20 +337,32 @@ namespace NPIKinectv2
             // Boton de volver a Menu inicial.
         }
 
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            segundos++;
+            CronoText.Text = dt.AddSeconds(segundos).ToString("ss");
+        }
+
+
         private void IniciarJuego()
         {
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
-            // Meter tiempo, boton para salir a inicio.
+
+            
+
+
             if (colocado)
             {
                 this.JuegoAgilidad();
             }
         }
 
-// Añadimos funciones a realizar con hotkeys.
-private void masMargenH(object sender, ExecutedRoutedEventArgs e)
+
+        // Añadimos funciones a realizar con hotkeys.
+        private void masMargenH(object sender, ExecutedRoutedEventArgs e)
         {
             porcentaje_alto += 0.05;
             porcHText.Text = porcentaje_alto.ToString();
@@ -428,6 +454,7 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
+            ganaste.Visibility = System.Windows.Visibility.Hidden;
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();
@@ -598,7 +625,7 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
             }
         }
         
-
+        
         private void JuegoAgilidad()
         {
             //Añadir contador de tiempo y de puntos
@@ -610,6 +637,8 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
             int[] bomb4 = { 9704, 9522, 9884, 9960, 9479, 9744, 9403, 9800, 10012 };
 
             bombilla.Visibility = System.Windows.Visibility.Visible;
+            
+            
 
             if (!tocada[0])
             {
@@ -673,6 +702,7 @@ private void masMargenH(object sender, ExecutedRoutedEventArgs e)
                                             {
                                                 bombilla.Visibility = System.Windows.Visibility.Hidden;
                                                 MovimientoText.Text = "Ganaste";
+                                                dispatcherTimer.Stop();
                                             }
                                         }
                                     }

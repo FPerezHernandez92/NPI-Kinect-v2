@@ -42,8 +42,9 @@ namespace NPIKinectv2
         int mejor_tiempo = 999999;
         DateTime dt;
 
-        bool activado = false;
+        bool activadoder = false, activadoizq = false;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        
 
 
 
@@ -296,9 +297,11 @@ namespace NPIKinectv2
                                 botonesmenu[1] = false;
                                 botonesmenu[2] = false;
                                 botonesmenu[3] = false;
-                                if (segundos < mejor_tiempo)
+                                if (segundos < mejor_tiempo && segundos != 0)
+                                {
                                     mejor_tiempo = segundos;
-                                mejorpuntuacion.Text = mejor_tiempo.ToString();
+                                    mejorpuntuacion.Text = mejor_tiempo.ToString();
+                                }
                                 segundos = 0;
                                 break;
                         }
@@ -309,9 +312,11 @@ namespace NPIKinectv2
                                 botonesmenu[1] = false;
                                 botonesmenu[2] = false;
                                 botonesmenu[3] = false;
-                                if (segundos < mejor_tiempo)
+                                if (segundos < mejor_tiempo && segundos != 0)
+                                {
                                     mejor_tiempo = segundos;
-                                mejorpuntuacion.Text = mejor_tiempo.ToString();
+                                    mejorpuntuacion.Text = mejor_tiempo.ToString();
+                                }
                                 segundos = 0;
                                 break;
                         }
@@ -327,8 +332,6 @@ namespace NPIKinectv2
                                 botonesmenu[1] = true;
                                 botonesmenu[2] = false;
                                 botonesmenu[3] = false;
-                                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-                                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
                                 dispatcherTimer.Start();
                                 break;
                         }
@@ -339,8 +342,6 @@ namespace NPIKinectv2
                                 botonesmenu[1] = true;
                                 botonesmenu[2] = false;
                                 botonesmenu[3] = false;
-                                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-                                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
                                 dispatcherTimer.Start();
                                 break;
                         }
@@ -394,7 +395,10 @@ namespace NPIKinectv2
             refresh.Visibility = System.Windows.Visibility.Hidden;
 
             precision = 0.03;
-
+            for (int i=0; i<9; i++)
+            {
+                tocada[i] = false;
+            }
 
             slider.Visibility = System.Windows.Visibility.Hidden;
             difitex1.Visibility = System.Windows.Visibility.Hidden;
@@ -402,10 +406,10 @@ namespace NPIKinectv2
             difitex3.Visibility = System.Windows.Visibility.Hidden;
             difitex4.Visibility = System.Windows.Visibility.Hidden;
 
-
             tocarBotonMenu(912 + 50, 171 + 50, 1, handStateleft, handStateright); //play
             tocarBotonMenu(1251 + 50, 312 + 50, 3, handStateleft, handStateright); //options
             tocarBotonMenu(575 + 50, 312 + 50, 2, handStateleft, handStateright); //cancel
+
 
             //poner el puño cerrado
         }
@@ -416,38 +420,43 @@ namespace NPIKinectv2
                 ||
                 (((int)manoIzquierda.X > (posX - (300))) && ((int)manoIzquierda.X < (posX + (300)))))
             {
-                //if ((((int)manoDerecha.Y > (posY - (posY * precision*2))) && ((int)manoDerecha.Y < (posY + (posY * precision*2))))
-                   // ||
-                   // (((int)manoIzquierda.Y > (posY - (posY * precision*2))) && ((int)manoIzquierda.Y < (posY + (posY * precision*2)))))
-                //{
+                if ((((int)manoDerecha.Y > (posY - (posY * precision*2))) && ((int)manoDerecha.Y < (posY + (posY * precision*2))))
+                    ||
+                    (((int)manoIzquierda.Y > (posY - (posY * precision*2))) && ((int)manoIzquierda.Y < (posY + (posY * precision*2)))))
+                {
+                    MovimientoText.Text = "Mueve el slider";
                     switch (handStateleft)
                     {
                         case HandState.Closed:
                             
                             if (slider.Value == 0 && ( ((int)manoIzquierda.X > 647) && ((int)manoIzquierda.X < 847) ) )
                             {
-                                activado = true;
+                                activadoizq = true;
                             }
                             if (slider.Value == 1 && (((int)manoIzquierda.X > 847) && ((int)manoIzquierda.X < 1047)))
                             {
-                                activado = true;
+                                activadoizq  = true;
                             }
                             if (slider.Value == 2 && (((int)manoIzquierda.X > 1047) && ((int)manoIzquierda.X < 1247)))
                             {
-                                activado = true;
+                                activadoizq = true;
                             }
-                            if (activado && (((int)manoIzquierda.X < 847)))
+                            if (activadoizq && (((int)manoIzquierda.X < 847)))
                             {
                                 slider.Value = 0;
                             }
-                            if (activado && (((int)manoIzquierda.X > 847) && ((int)manoIzquierda.X < 1047)))
+                            if (activadoizq && (((int)manoIzquierda.X > 847) && ((int)manoIzquierda.X < 1047)))
                             {
                                 slider.Value = 1;
                             }
-                            if (activado && ((int)manoIzquierda.X > 1047))
+                            if (activadoizq && ((int)manoIzquierda.X > 1047))
                             {
                                 slider.Value = 2;
                             }
+                            break;
+
+                        case HandState.Open:
+                            activadoizq = false;
                             break;
                     }
                     switch (handStateright)
@@ -455,31 +464,34 @@ namespace NPIKinectv2
                         case HandState.Closed:
                             if (slider.Value == 0 && (((int)manoDerecha.X > 647) && ((int)manoDerecha.X < 847)))
                             {
-                                activado = true;
+                                activadoder = true;
                             }
                             if (slider.Value == 1 && (((int)manoDerecha.X > 847) && ((int)manoDerecha.X < 1047)))
                             {
-                                activado = true;
+                                activadoder = true;
                             }
                             if (slider.Value == 2 && (((int)manoDerecha.X > 1047) && ((int)manoDerecha.X < 1247)))
                             {
-                                activado = true;
+                                activadoder = true;
                             }
-                            if (activado && ( ((int)manoDerecha.X < 847)))
+                            if (activadoder && ( ((int)manoDerecha.X < 847)))
                             {
                                 slider.Value = 0;
                             }
-                            if (activado && (((int)manoDerecha.X > 847) && ((int)manoDerecha.X < 1047)))
+                            if (activadoder && (((int)manoDerecha.X > 847) && ((int)manoDerecha.X < 1047)))
                             {
                                 slider.Value = 1;
                             }
-                            if (activado && (((int)manoDerecha.X > 1047) ))
+                            if (activadoder && (((int)manoDerecha.X > 1047) ))
                             {
                                 slider.Value = 2;
                             }
                             break;
+                        case HandState.Open:
+                            activadoder = false;
+                            break;
                     }
-                //}
+                }
             }
 
         }
@@ -501,7 +513,7 @@ namespace NPIKinectv2
             refresh.Visibility = System.Windows.Visibility.Visible;
             tocarBotonMenu(1171 + 50, 180 + 50, 0,handStateleft, handStateright);  //refresh
 
-            controlarSlider(251+713+50,479+50,handStateleft, handStateright);
+            controlarSlider(251+713+50,524+50,handStateleft, handStateright);
 
             // Modificar precisión y margenes.
             // Boton de volver a Menu inicial.
@@ -633,7 +645,13 @@ namespace NPIKinectv2
             difitex1.Visibility = System.Windows.Visibility.Hidden;
             difitex2.Visibility = System.Windows.Visibility.Hidden;
             difitex3.Visibility = System.Windows.Visibility.Hidden;
+
             difitex4.Visibility = System.Windows.Visibility.Hidden;
+
+
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+
 
             porcHText.Text = porcentaje_alto.ToString();
             porcVText.Text = porcentaje_bajo.ToString();
@@ -821,6 +839,7 @@ namespace NPIKinectv2
 
             if (!tocada[0])
             {
+                bombilla.Margin = new Thickness(bomb1[0], bomb2[0], bomb3[0], bomb4[0]);
                 tocarBombilla(bomb1[0] + 50, bomb2[0] + 50, 0);
             }
             if (tocada[0])

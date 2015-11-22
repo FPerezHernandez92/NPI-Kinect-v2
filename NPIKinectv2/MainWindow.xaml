@@ -102,7 +102,7 @@
             </TextBlock.Background>
         </TextBlock>
         <Image x:Name="refresh" Margin="1171,180,656,9980" Source="refresh.png" Stretch="Fill" Width="65" Height="65"/>
-        <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="0,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="94" Width="154" FontSize="64" Background="Transparent"/>
+        <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="0,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="94" Width="154" FontSize="48" Background="Transparent"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="656,524,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.5,0.5" SmallChange="0" Width="590" Maximum="2" TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="False" Value="1" Background="Transparent">
             <Slider.LayoutTransform>
                 <ScaleTransform ScaleY="3" CenterX="15" CenterY="15"/>

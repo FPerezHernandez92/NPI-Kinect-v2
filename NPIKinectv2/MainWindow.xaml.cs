@@ -32,7 +32,7 @@ namespace NPIKinectv2
         double porcentaje_bajo = 0.10;
         double porcentaje_lados = 0.10;
         double precision = 0.03;
-        bool tocada1 = false, tocada2 = false;
+        bool[] tocada = { false, false, false, false, false, false, false, false, false};
         bool colocado = false;
 
         /// <summary>
@@ -436,6 +436,7 @@ namespace NPIKinectv2
                 MovimientoText.Text = "Alejate";
                 colocado = false;
 
+
                 circuloVerde.Visibility = System.Windows.Visibility.Hidden;
                 circuloRojo.Visibility = System.Windows.Visibility.Hidden;
                 flecha1.Visibility = System.Windows.Visibility.Hidden;
@@ -472,7 +473,7 @@ namespace NPIKinectv2
             
         }
 
-        void tocarBombilla1(int posXbombilla, int posYbombilla)
+        void tocarBombilla(int posXbombilla, int posYbombilla, int i)
         {
             if ((((int)manoDerecha.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoDerecha.X < (posXbombilla + (posXbombilla * precision))))
                 ||
@@ -482,56 +483,95 @@ namespace NPIKinectv2
                     ||
                     (((int)manoIzquierda.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoIzquierda.Y < (posYbombilla + (posYbombilla * precision)))))
                 {
-                    tocada1 = true;
+                    tocada[i] = true;
                 }
             }
         }
-
-        void tocarBombilla2(int posXbombilla, int posYbombilla)
-        {
-            if ((((int)manoDerecha.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoDerecha.X < (posXbombilla + (posXbombilla * precision))))
-                ||
-                (((int)manoIzquierda.X > (posXbombilla - (posXbombilla * precision))) && ((int)manoIzquierda.X < (posXbombilla + (posXbombilla * precision)))))
-            {
-                if ((((int)manoDerecha.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoDerecha.Y < (posYbombilla + (posYbombilla * precision))))
-                    ||
-                    (((int)manoIzquierda.Y > (posYbombilla - (posYbombilla * precision))) && ((int)manoIzquierda.Y < (posYbombilla + (posYbombilla * precision)))))
-                {
-                    tocada2 = true;
-                }
-            }
-        }
+        
 
         private void JuegoAgilidad()
         {
             //Añadir contador de tiempo y de puntos
             //De momento solo van a salir 8 pelotas 
-            int posXbombilla = 1346+50;
-            int posYbombilla = 396+50;
+
+            int[] bomb1 = { 1346, 590, 1292, 642, 913, 590, 623, 733, 1047 };
+            int[] bomb2 = { 396, 518, 256, 180, 661, 396, 737, 340, 128 };
+            int[] bomb3 = { 481, 1252, 550, 1200, 929, 1252, 1219, 1109, 795 };
+            int[] bomb4 = { 9704, 9522, 9884, 9960, 9479, 9744, 9403, 9800, 10012 };
 
             bombilla.Visibility = System.Windows.Visibility.Visible;
 
-            if (!tocada1)
+            if (!tocada[0])
             {
-                tocarBombilla1(posXbombilla, posYbombilla);
+                tocarBombilla(bomb1[0] + 50, bomb2[0] + 50, 0);
             }
-            if (tocada1)
+            if (tocada[0])
             {
-                if (!tocada2)
+                if (!tocada[1])
                 {
-                    bombilla.Margin = new Thickness(590, 518, 1252, 9522);
-                    tocarBombilla2(590 + 50, 518 + 50);
+                    bombilla.Margin = new Thickness(bomb1[1], bomb2[1], bomb3[1], bomb4[1]);
+                    tocarBombilla(bomb1[1] + 50, bomb2[1] + 50, 1);
                 }
-                if (tocada2)
+                if (tocada[1])
                 {
-
-                    bombilla.Visibility = System.Windows.Visibility.Hidden;
-                    MovimientoText.Text = "Ganaste";
+                    if (!tocada[2]){
+                        bombilla.Margin = new Thickness(bomb1[2], bomb2[2], bomb3[2], bomb4[2]);
+                        tocarBombilla(bomb1[2] + 50, bomb2[2] + 50, 2);
+                    }
+                    if (tocada[2]) {
+                        if (!tocada[3])
+                        {
+                            bombilla.Margin = new Thickness(bomb1[3], bomb2[3], bomb3[3], bomb4[3]);
+                            tocarBombilla(bomb1[3] + 50, bomb2[3] + 50, 3);
+                        }
+                        if (tocada[3])
+                        {
+                            if (!tocada[4])
+                            {
+                                bombilla.Margin = new Thickness(bomb1[4], bomb2[4], bomb3[4], bomb4[4]);
+                                tocarBombilla(bomb1[4] + 50, bomb2[4] + 50, 4);
+                            }
+                            if (tocada[4])
+                            {
+                                if (!tocada[5])
+                                {
+                                    bombilla.Margin = new Thickness(bomb1[5], bomb2[5], bomb3[5], bomb4[5]);
+                                    tocarBombilla(bomb1[5] + 50, bomb2[5] + 50, 5);
+                                }
+                                if (tocada[5])
+                                {
+                                    if (!tocada[6])
+                                    {
+                                        bombilla.Margin = new Thickness(bomb1[6], bomb2[6], bomb3[6], bomb4[6]);
+                                        tocarBombilla(bomb1[6] + 50, bomb2[6] + 50, 6);
+                                    }
+                                    if (tocada[6])
+                                    {
+                                        if (!tocada[7])
+                                        {
+                                            bombilla.Margin = new Thickness(bomb1[7], bomb2[7], bomb3[7], bomb4[7]);
+                                            tocarBombilla(bomb1[7] + 50, bomb2[7] + 50, 7);
+                                        }
+                                        if (tocada[7])
+                                        {
+                                            if (!tocada[8])
+                                            {
+                                                bombilla.Margin = new Thickness(bomb1[8], bomb2[8], bomb3[8], bomb4[8]);
+                                                tocarBombilla(bomb1[8] + 50, bomb2[8] + 50, 8);
+                                            }
+                                            if (tocada[8])
+                                            {
+                                                bombilla.Visibility = System.Windows.Visibility.Hidden;
+                                                MovimientoText.Text = "Ganaste";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            
-            
-
         }
 
         /// <summary>

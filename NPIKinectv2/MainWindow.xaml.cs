@@ -18,7 +18,7 @@ namespace NPIKinectv2
         /// <summary>
         /// Activado el modo noche.
         /// </summary>
-        bool modoblanco=true;
+        bool modoblanco=false;
 
         /// <summary>
         /// Porcentaje de error que vamos a admitir.
@@ -445,6 +445,7 @@ namespace NPIKinectv2
         /// </summary
         private void IniciarMenu(HandState handStateleft, HandState handStateright)
         {
+            checkbox.Visibility = System.Windows.Visibility.Hidden;
             if (!modoblanco)
             {
                 play.Visibility = System.Windows.Visibility.Visible;
@@ -568,6 +569,37 @@ namespace NPIKinectv2
         }
 
         /// <summary>
+        /// Tocar el check box
+        /// </summary
+        private void tocarCheckBox(int posX, int posY, HandState handStateleft, HandState handStateright)
+        {
+            if ((((int)manoDerecha.X > (posX - (posX * precision))) && ((int)manoDerecha.X < (posX + (posX * precision))))
+                ||
+                (((int)manoIzquierda.X > (posX - (posX * precision))) && ((int)manoIzquierda.X < (posX + (posX * precision)))))
+            {
+                if ((((int)manoDerecha.Y > (posY - (posY * precision))) && ((int)manoDerecha.Y < (posY + (posY * precision))))
+                    ||
+                    (((int)manoIzquierda.Y > (posY - (posY * precision))) && ((int)manoIzquierda.Y < (posY + (posY * precision)))))
+                {
+                    switch (handStateright)
+                    {
+                        case HandState.Closed:
+                            checkbox.IsChecked = !checkbox.IsChecked;
+                            modoblanco = !modoblanco;
+                            break;
+                    }
+                    switch (handStateleft)
+                    {
+                        case HandState.Closed:
+                            checkbox.IsChecked = !checkbox.IsChecked;
+                            modoblanco = !modoblanco;
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Inicia el menú de opciones.
         /// </summary
         private void IniciarOpciones(HandState handStateleft, HandState handStateright)
@@ -584,6 +616,10 @@ namespace NPIKinectv2
             difitex2.Visibility = System.Windows.Visibility.Visible;
             difitex3.Visibility = System.Windows.Visibility.Visible;
             difitex4.Visibility = System.Windows.Visibility.Visible;
+
+            checkbox.Visibility = System.Windows.Visibility.Visible;
+
+            tocarCheckBox(660+50,180+50,handStateleft,handStateright);
 
             if (!modoblanco)
             {
@@ -737,7 +773,7 @@ namespace NPIKinectv2
             difitex2.Visibility = System.Windows.Visibility.Hidden;
             difitex3.Visibility = System.Windows.Visibility.Hidden;
             difitex4.Visibility = System.Windows.Visibility.Hidden;
-
+            checkbox.Visibility = System.Windows.Visibility.Hidden;
 
             /// <summary>
             /// Creamos el temporizador y le añadimos un tiempo de tick.

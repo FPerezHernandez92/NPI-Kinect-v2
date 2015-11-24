@@ -81,6 +81,11 @@
         <TextBlock x:Name="difitex3" HorizontalAlignment="Left" Margin="1202,530,0,0" TextWrapping="Wrap" Text="Dificil" VerticalAlignment="Top" FontSize="26.667"/>
         <TextBlock x:Name="difitex4" HorizontalAlignment="Left" Margin="885,440,0,0" TextWrapping="Wrap" Text="DIFICULTAD" VerticalAlignment="Top" FontSize="26.667"/>
         <TextBlock x:Name="mejortiempoText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="139" Width="178" FontSize="48" Background="Transparent" Text="Mejor Tiempo:"/>
+        <CheckBox x:Name="checkbox"  HorizontalAlignment="Left" Margin="650,178,0,0" VerticalAlignment="Top" Height="15" FontSize="48" Width="17">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="5" ScaleY="5" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

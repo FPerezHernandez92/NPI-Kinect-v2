@@ -14,7 +14,7 @@
             <Setter Property="SnapsToDevicePixels" Value="True" />
         </Style>
     </Window.Resources>
-    
+
     <Grid Margin="10 0 10 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -32,7 +32,7 @@
             </Image.RenderTransform>
         </Image>
         <Image x:Name="flecha2w" Margin="1243,518,499,9522" Source="flecha2w.png" Stretch="Fill" Width="150" Height="150">
-            
+
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -86,6 +86,7 @@
                 <ScaleTransform ScaleX="5" ScaleY="5" />
             </CheckBox.LayoutTransform>
         </CheckBox>
+        <TextBlock x:Name="modonoche" HorizontalAlignment="Left" Margin="433,194,0,0" TextWrapping="Wrap" Text="Modo noche" VerticalAlignment="Top" Height="51" Width="207" FontSize="36" Foreground="Black"/>
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>

@@ -477,6 +477,7 @@ namespace NPIKinectv2
             difitex2.Visibility = System.Windows.Visibility.Hidden;
             difitex3.Visibility = System.Windows.Visibility.Hidden;
             difitex4.Visibility = System.Windows.Visibility.Hidden;
+            modonoche.Visibility = System.Windows.Visibility.Hidden;
 
             tocarBotonMenu(912 + 50, 171 + 50, 1, handStateleft, handStateright); //play
             tocarBotonMenu(1251 + 50, 312 + 50, 3, handStateleft, handStateright); //options
@@ -618,6 +619,7 @@ namespace NPIKinectv2
             difitex4.Visibility = System.Windows.Visibility.Visible;
 
             checkbox.Visibility = System.Windows.Visibility.Visible;
+            modonoche.Visibility = System.Windows.Visibility.Visible;
 
             tocarCheckBox(660+50,180+50,handStateleft,handStateright);
 
@@ -625,11 +627,29 @@ namespace NPIKinectv2
             {
                 refresh.Visibility = System.Windows.Visibility.Visible;
                 refreshw.Visibility = System.Windows.Visibility.Hidden;
+                difitex1.Foreground = Brushes.Black;
+                difitex2.Foreground = Brushes.Black;
+                difitex3.Foreground = Brushes.Black;
+                difitex4.Foreground = Brushes.Black;
+                modonoche.Foreground = Brushes.Black;
+                mejortiempoText.Foreground = Brushes.Black;
+                mejorpuntuacion.Foreground = Brushes.Black;
+                MovimientoText.Foreground = Brushes.Black;
+                skeletonFlag = false;
             }
             else
             {
                 refresh.Visibility = System.Windows.Visibility.Hidden;
                 refreshw.Visibility = System.Windows.Visibility.Visible;
+                difitex1.Foreground = Brushes.White;
+                difitex2.Foreground = Brushes.White;
+                difitex3.Foreground = Brushes.White;
+                difitex4.Foreground = Brushes.White;
+                modonoche.Foreground = Brushes.White;
+                mejortiempoText.Foreground = Brushes.White;
+                mejorpuntuacion.Foreground = Brushes.White;
+                MovimientoText.Foreground = Brushes.White;
+                skeletonFlag = true;
             }
             tocarBotonMenu(1171 + 50, 180 + 50, 0, handStateleft, handStateright);  //refresh
 
@@ -774,6 +794,8 @@ namespace NPIKinectv2
             difitex3.Visibility = System.Windows.Visibility.Hidden;
             difitex4.Visibility = System.Windows.Visibility.Hidden;
             checkbox.Visibility = System.Windows.Visibility.Hidden;
+
+            modonoche.Visibility = System.Windows.Visibility.Hidden;
 
             /// <summary>
             /// Creamos el temporizador y le añadimos un tiempo de tick.

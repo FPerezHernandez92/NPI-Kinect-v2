@@ -13,6 +13,106 @@ D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.cspr
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.exe
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\Microsoft.Kinect.dll
+D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.dll
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\Microsoft.Kinect.xml
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.pdb
 D:\Dropbox\z4 Cuarto\GITWin\NPI-Kinect-v2\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.csprojResolveAssemblyReference.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\MainWindow.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\App.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.lref
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\Microsoft.Kinect.dll
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\Microsoft.Kinect.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\MainWindow.baml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.g.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.Properties.Resources.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
+D:\Descargas\1CHROME\PruebasEnKinect-77642469df35af0fe4eb163686b5a69a8a65bd44\PruebasEnKinect-77642469df35af0fe4eb163686b5a69a8a65bd44\tarea3pollo\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+D:\Descargas\1CHROME\PruebasEnKinect-77642469df35af0fe4eb163686b5a69a8a65bd44\PruebasEnKinect-77642469df35af0fe4eb163686b5a69a8a65bd44\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+D:\Descargas\1CHROME\PruebasEnKinect-77642469df35af0fe4eb163686b5a69a8a65bd44\PruebasEnKinect-77642469df35af0fe4eb163686b5a69a8a65bd44\tarea3pollo\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\Microsoft.Kinect.dll
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\Microsoft.Kinect.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2.csprojResolveAssemblyReference.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\MainWindow.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\App.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.lref
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\MainWindow.baml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2.g.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2.Properties.Resources.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\19nov\NPIKinectv2\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\Microsoft.Kinect.dll
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\Microsoft.Kinect.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.csprojResolveAssemblyReference.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\MainWindow.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\App.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.lref
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\MainWindow.baml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.g.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.Properties.Resources.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
+C:\Users\Gea\Documents\GitHub\Practica1NPIKinect\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+C:\Users\Gea\Documents\GitHub\Practica1NPIKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+C:\Users\Gea\Documents\GitHub\Practica1NPIKinect\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe.config
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.exe
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.pdb
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.exe
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\NPIKinectv2.pdb
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\Microsoft.Kinect.dll
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\Microsoft.Kinect.xml
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.pdb
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\bin\Debug\WriteableBitmapEx.Wpf.xml
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.csprojResolveAssemblyReference.cache
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\MainWindow.g.cs
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\App.g.cs
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.cache
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2_MarkupCompile.lref
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\MainWindow.baml
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.g.resources
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.Properties.Resources.resources
+C:\Users\herpe\Downloads\PruebasEnKinect-4ea0307bbb32d54c792c2924a4ccebf0b09be7fe\22nov\NPIKinectv2\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\NPIKinectv2.exe.config
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.csprojResolveAssemblyReference.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\MainWindow.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\App.g.cs
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2_MarkupCompile.cache
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2_MarkupCompile.lref
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\NPIKinectv2.exe
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\NPIKinectv2.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\Microsoft.Kinect.dll
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\Microsoft.Kinect.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\WriteableBitmapEx.Wpf.pdb
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\bin\Debug\WriteableBitmapEx.Wpf.xml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\MainWindow.baml
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.g.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.Properties.Resources.resources
+D:\Dropbox\z4 Cuarto\GITWin\PruebasEnKinect\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.csproj.GenerateResource.Cache
+C:\Users\herpe\Downloads\PruebasEnKinect-bcf980bb4c06ba4b19979aac0cef6d5eba3f59b4\DelOtroRepoUltimoComit22del11\bin\Debug\NPIKinectv2.exe.config
+C:\Users\herpe\Downloads\PruebasEnKinect-bcf980bb4c06ba4b19979aac0cef6d5eba3f59b4\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.exe
+C:\Users\herpe\Downloads\PruebasEnKinect-bcf980bb4c06ba4b19979aac0cef6d5eba3f59b4\DelOtroRepoUltimoComit22del11\obj\Debug\NPIKinectv2.pdb

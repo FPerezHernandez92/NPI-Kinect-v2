@@ -31,11 +31,26 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
+        <Image x:Name="flecha2w" Margin="1243,518,499,9522" Source="flecha2w.png" Stretch="Fill" Width="150" Height="150">
+            
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.945"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.842"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
         <Image x:Name="flecha1" Margin="490,518,1252,9522" Source="flecha1.png" Stretch="Fill" Width="150" Height="150"/>
+        <Image x:Name="flecha1w" Margin="490,518,1252,9522" Source="flecha1w.png" Stretch="Fill" Width="150" Height="150"/>
         <Image x:Name="bombilla" Margin="1346,396,481,9704" Source="bombilla.png" Stretch="Fill" Width="65" Height="90"/>
         <Image x:Name="play" Margin="912,171,915,9971" Source="play.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="playw" Margin="912,171,915,9971" Source="playw.png" Stretch="Fill" Width="65" Height="65"/>
         <Image x:Name="cancel" Margin="1251,312,576,9847" Source="cancel.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="cancelw" Margin="1251,312,576,9847" Source="cancelw.png" Stretch="Fill" Width="65" Height="65"/>
         <Image x:Name="settings" Margin="575,312,1252,9847" Source="settings.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="settingsw" Margin="575,312,1252,9847" Source="settingsw.png" Stretch="Fill" Width="65" Height="65"/>
         <Label Name="lblTime" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <TextBlock x:Name="CronoText" HorizontalAlignment="Left" Margin="872,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="153" FontSize="24" FontWeight="Bold" TextAlignment="Center" >
             <TextBlock.Background>
@@ -46,6 +61,7 @@
             </TextBlock.Background>
         </TextBlock>
         <Image x:Name="refresh" Margin="1171,180,656,9980" Source="refresh.png" Stretch="Fill" Width="65" Height="65"/>
+        <Image x:Name="refreshw" Margin="1171,180,656,9980" Source="refreshw.png" Stretch="Fill" Width="65" Height="65"/>
         <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="193,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="94" Width="154" FontSize="48" Background="Transparent"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="656,524,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.5,0.5" SmallChange="0" Width="590" Maximum="2" TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="False" Value="1" Background="Transparent">
             <Slider.LayoutTransform>

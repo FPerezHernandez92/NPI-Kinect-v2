@@ -450,7 +450,7 @@ namespace NPIKinectv2
             {
                 tocada[i] = false;
             }
-
+            
             slider.Visibility = System.Windows.Visibility.Hidden;
             difitex1.Visibility = System.Windows.Visibility.Hidden;
             difitex2.Visibility = System.Windows.Visibility.Hidden;

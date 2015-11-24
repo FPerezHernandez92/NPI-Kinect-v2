@@ -16,6 +16,11 @@ namespace NPIKinectv2
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         /// <summary>
+        /// Activado el modo noche.
+        /// </summary>
+        bool modoblanco=true;
+
+        /// <summary>
         /// Porcentaje de error que vamos a admitir.
         /// </summary>
         double porcentaje_alto = 0.10;
@@ -440,17 +445,32 @@ namespace NPIKinectv2
         /// </summary
         private void IniciarMenu(HandState handStateleft, HandState handStateright)
         {
-            play.Visibility = System.Windows.Visibility.Visible;
-            cancel.Visibility = System.Windows.Visibility.Visible;
-            settings.Visibility = System.Windows.Visibility.Visible;
-            refresh.Visibility = System.Windows.Visibility.Hidden;
-
+            if (!modoblanco)
+            {
+                play.Visibility = System.Windows.Visibility.Visible;
+                cancel.Visibility = System.Windows.Visibility.Visible;
+                settings.Visibility = System.Windows.Visibility.Visible;
+                playw.Visibility = System.Windows.Visibility.Hidden;
+                cancelw.Visibility = System.Windows.Visibility.Hidden;
+                settingsw.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                playw.Visibility = System.Windows.Visibility.Visible;
+                cancelw.Visibility = System.Windows.Visibility.Visible;
+                settingsw.Visibility = System.Windows.Visibility.Visible;
+                play.Visibility = System.Windows.Visibility.Hidden;
+                cancel.Visibility = System.Windows.Visibility.Hidden;
+                settings.Visibility = System.Windows.Visibility.Hidden;
+            }
             precision = 0.03;
             for (int i=0; i<9; i++)
             {
                 tocada[i] = false;
             }
-            
+
+            refresh.Visibility = System.Windows.Visibility.Hidden;
+            refreshw.Visibility = System.Windows.Visibility.Hidden;
             slider.Visibility = System.Windows.Visibility.Hidden;
             difitex1.Visibility = System.Windows.Visibility.Hidden;
             difitex2.Visibility = System.Windows.Visibility.Hidden;
@@ -555,7 +575,9 @@ namespace NPIKinectv2
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
-
+            playw.Visibility = System.Windows.Visibility.Hidden;
+            cancelw.Visibility = System.Windows.Visibility.Hidden;
+            settingsw.Visibility = System.Windows.Visibility.Hidden;
 
             slider.Visibility = System.Windows.Visibility.Visible;
             difitex1.Visibility = System.Windows.Visibility.Visible;
@@ -563,8 +585,17 @@ namespace NPIKinectv2
             difitex3.Visibility = System.Windows.Visibility.Visible;
             difitex4.Visibility = System.Windows.Visibility.Visible;
 
-            refresh.Visibility = System.Windows.Visibility.Visible;
-            tocarBotonMenu(1171 + 50, 180 + 50, 0,handStateleft, handStateright);  //refresh
+            if (!modoblanco)
+            {
+                refresh.Visibility = System.Windows.Visibility.Visible;
+                refreshw.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                refresh.Visibility = System.Windows.Visibility.Hidden;
+                refreshw.Visibility = System.Windows.Visibility.Visible;
+            }
+            tocarBotonMenu(1171 + 50, 180 + 50, 0, handStateleft, handStateright);  //refresh
 
             controlarSlider(251+713+50,524+50,handStateleft, handStateright);
         }
@@ -586,6 +617,9 @@ namespace NPIKinectv2
             play.Visibility = System.Windows.Visibility.Hidden;
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
+            playw.Visibility = System.Windows.Visibility.Hidden;
+            cancelw.Visibility = System.Windows.Visibility.Hidden;
+            settingsw.Visibility = System.Windows.Visibility.Hidden;
 
             if (slider.Value == 0) precision = 0.04;
             else if (slider.Value == 2) precision = 0.02;
@@ -690,6 +724,14 @@ namespace NPIKinectv2
             cancel.Visibility = System.Windows.Visibility.Hidden;
             settings.Visibility = System.Windows.Visibility.Hidden;
             refresh.Visibility = System.Windows.Visibility.Hidden;
+
+            flecha1w.Visibility = System.Windows.Visibility.Hidden;
+            flecha2w.Visibility = System.Windows.Visibility.Hidden;
+            playw.Visibility = System.Windows.Visibility.Hidden;
+            cancelw.Visibility = System.Windows.Visibility.Hidden;
+            settingsw.Visibility = System.Windows.Visibility.Hidden;
+            refreshw.Visibility = System.Windows.Visibility.Hidden;
+
             slider.Visibility = System.Windows.Visibility.Hidden;
             difitex1.Visibility = System.Windows.Visibility.Hidden;
             difitex2.Visibility = System.Windows.Visibility.Hidden;
@@ -824,17 +866,42 @@ namespace NPIKinectv2
                 {
                     MovimientoText.Text = "Muevete al centro";
                     colocado = false;
-                    
-                    flecha1.Visibility = System.Windows.Visibility.Visible;
-                    flecha2.Visibility = System.Windows.Visibility.Visible;
+
+                    if (!modoblanco)
+                    {
+                        flecha1.Visibility = System.Windows.Visibility.Visible;
+                        flecha2.Visibility = System.Windows.Visibility.Visible;
+                        flecha1w.Visibility = System.Windows.Visibility.Hidden;
+                        flecha2w.Visibility = System.Windows.Visibility.Hidden;
+                    }
+                    else
+                    {
+                        flecha1w.Visibility = System.Windows.Visibility.Visible;
+                        flecha2w.Visibility = System.Windows.Visibility.Visible;
+                        flecha1.Visibility = System.Windows.Visibility.Hidden;
+                        flecha2.Visibility = System.Windows.Visibility.Hidden;
+                    }
                 }
                 else if (((int)manoDerecha.X) > widthPantallaMax)
                 {
                     MovimientoText.Text = "Muevete al centro";
                     colocado = false;
+
+                    if (!modoblanco)
+                    {
+                        flecha1.Visibility = System.Windows.Visibility.Visible;
+                        flecha2.Visibility = System.Windows.Visibility.Visible;
+                        flecha1w.Visibility = System.Windows.Visibility.Hidden;
+                        flecha2w.Visibility = System.Windows.Visibility.Hidden;
+                    }
+                    else
+                    {
+                        flecha1w.Visibility = System.Windows.Visibility.Visible;
+                        flecha2w.Visibility = System.Windows.Visibility.Visible;
+                        flecha1.Visibility = System.Windows.Visibility.Hidden;
+                        flecha2.Visibility = System.Windows.Visibility.Hidden;
+                    }
                     
-                    flecha1.Visibility = System.Windows.Visibility.Visible;
-                    flecha2.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
                 {
@@ -938,7 +1005,17 @@ namespace NPIKinectv2
                                             {
                                                 bombilla.Visibility = System.Windows.Visibility.Hidden;
                                                 dispatcherTimer.Stop();
-                                                refresh.Visibility = System.Windows.Visibility.Visible;
+                                                if (!modoblanco)
+                                                {
+                                                    refresh.Visibility = System.Windows.Visibility.Visible;
+                                                    refreshw.Visibility = System.Windows.Visibility.Hidden;
+                                                }
+                                                else
+                                                {
+                                                    refreshw.Visibility = System.Windows.Visibility.Visible;
+                                                    refresh.Visibility = System.Windows.Visibility.Hidden;
+                                                }
+                                                
                                                 tocarBotonMenu(1171+50, 180 + 50, 0, handStateleft, handStateright);  //refresh
                                             }
                                         }

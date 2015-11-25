@@ -1,0 +1,15 @@
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\bin\Debug\WriteableBitmapEx.exe.config
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\bin\Debug\WriteableBitmapEx.exe
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\bin\Debug\WriteableBitmapEx.pdb
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\bin\Debug\WriteableBitmapEx.Wpf.dll
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\bin\Debug\WriteableBitmapEx.Wpf.pdb
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\bin\Debug\WriteableBitmapEx.Wpf.xml
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\App.g.cs
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\WriteableBitmapEx_MarkupCompile.cache
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\WriteableBitmapEx.g.resources
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\WriteableBitmapEx.Properties.Resources.resources
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\WriteableBitmapEx.csproj.GenerateResource.Cache
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\WriteableBitmapEx.exe
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\WriteableBitmapEx.pdb
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\Window1.baml
+E:\Users\zubairdotnet\Downloads\Kinect for Windows v2 SDK\K4W-v2.0-DevPreview1311-Samples\Managed\BodyColorSource\WriteableBitmapEx\obj\Debug\Window1.g.cs

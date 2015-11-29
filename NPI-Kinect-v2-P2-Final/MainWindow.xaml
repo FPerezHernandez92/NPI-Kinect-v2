@@ -1,0 +1,106 @@
+﻿<Window x:Class="NPIKinectv2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NPIKinectv2"
+        mc:Ignorable="d"
+        Title="Ventana" 
+        Height="1080" Width="1920" 
+        Loaded="MainWindow_Loaded"
+        Closing="MainWindow_Closing">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10 0 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Stretch="UniformToFill" Name="Image" Margin="10,10,10,9151"  />
+        <TextBlock x:Name="MovimientoText" Background="#7FFFFFFF" HorizontalAlignment="Center" Margin="730,378,743,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="419" FontSize="32" TextAlignment="Center" FontWeight="Bold" Text="Agarra y mueve el slider"/>
+        <Image x:Name="flecha2" Margin="1243,518,499,9522" Source="flecha2.png" Stretch="Fill" Width="150" Height="150">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.945"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.842"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="flecha2w" Margin="1243,518,499,9522" Source="flecha2w.png" Stretch="Fill" Width="150" Height="150">
+
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.945"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.842"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="flecha1" Margin="490,518,1252,9522" Source="flecha1.png" Stretch="Fill" Width="150" Height="150"/>
+        <Image x:Name="flecha1w" Margin="490,518,1252,9522" Source="flecha1w.png" Stretch="Fill" Width="150" Height="150"/>
+        <Image x:Name="bombilla" Margin="1346,396,481,9704" Source="bombilla.png" Stretch="Fill" Width="65" Height="90"/>
+        <Image x:Name="play" Margin="912,171,915,9971" Source="play.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="playw" Margin="912,171,915,9971" Source="playw.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="playwv" Margin="912,171,915,9971" Source="playwv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="playv" Margin="912,171,915,9971" Source="playv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="cancel" Margin="1251,312,576,9847" Source="cancel.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="cancelw" Margin="1251,312,576,9847" Source="cancelw.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="cancelwv" Margin="1251,312,576,9847" Source="cancelwv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="cancelv" Margin="1251,312,576,9847" Source="cancelv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="settings" Margin="575,312,1252,9847" Source="settings.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="settingsw" Margin="575,312,1252,9847" Source="settingsw.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="settingswv" Margin="575,312,1252,9847" Source="settingswv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="settingsv" Margin="575,312,1252,9847" Source="settingsv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Label Name="lblTime" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="CronoText" HorizontalAlignment="Left" Margin="872,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="153" FontSize="24" FontWeight="Bold" TextAlignment="Center" Background="White" />
+        <Image x:Name="refresh" Margin="1171,180,656,9980" Source="refresh.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="refreshw" Margin="1171,180,656,9980" Source="refreshw.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="refreshwv" Margin="1171,180,656,9980" Source="refreshwv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="refreshv" Margin="1171,180,656,9980" Source="refreshv.png" Stretch="Fill" Width="75" Height="75"/>
+        <TextBlock x:Name="mejorpuntuacion" HorizontalAlignment="Left" Margin="144,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="109" FontSize="48" Background="#7FFFFFFF" TextAlignment="Center"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="656,524,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.5,0.5" SmallChange="0" Width="590" Maximum="2" TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="False" Value="1" Background="Transparent">
+            <Slider.LayoutTransform>
+                <ScaleTransform ScaleY="3" CenterX="15" CenterY="15"/>
+            </Slider.LayoutTransform>
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="179.672"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <TextBlock x:Name="difitex1" HorizontalAlignment="Left" Margin="640,530,0,0" TextWrapping="Wrap" Text="Fácil" VerticalAlignment="Top" FontSize="26.667" Background="#7FFFFFFF" FontWeight="Bold"/>
+        <TextBlock x:Name="difitex2" HorizontalAlignment="Left" Margin="912,530,0,0" TextWrapping="Wrap" Text="Media" VerticalAlignment="Top" FontSize="26.667" Background="#7FFFFFFF" FontWeight="Bold"/>
+        <TextBlock x:Name="difitex3" HorizontalAlignment="Left" Margin="1202,530,0,0" TextWrapping="Wrap" Text="Dificil" VerticalAlignment="Top" FontSize="26.667" FontWeight="Bold">
+            <TextBlock.Background>
+                <SolidColorBrush Color="{DynamicResource polloclor}"/>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock x:Name="difitex4" HorizontalAlignment="Left" Margin="885,599,0,0" TextWrapping="Wrap" Text="DIFICULTAD" VerticalAlignment="Top" FontSize="26.667" FontWeight="Bold" Background="#7FFFFFFF"/>
+        <TextBlock x:Name="difitex5" HorizontalAlignment="Left" Margin="1732,1004,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667" FontWeight="Bold" Background="#7FFFFFFF"/>
+        <Image x:Name="Luna" Margin="676,197,1168,9980" Source="moonb.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="Lunav" Margin="676,197,1168,9980" Source="moonv.png" Stretch="Fill" Width="75" Height="75"/>
+        <Image x:Name="Sol" Margin="676,197,1168,9980" Source="sunw.png" Stretch="Fill"  Width="65" Height="65"/>
+        <Image x:Name="Solv" Margin="676,197,1168,9980" Source="sunwv.png" Stretch="Fill"  Width="65" Height="65"/>
+        <Image x:Name="Start" Margin="37,46,1780,10158" Source="start.png" Stretch="Fill"  Width="75" Height="75"/>
+        <Image x:Name="Startb" Margin="37,46,1780,10158" Source="startb.png" Stretch="Fill"  Width="75" Height="75"/>
+    </Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenH}" Executed="masMargenH"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenH}" Executed="menosMargenH"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenV}" Executed="masMargenV"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenV}" Executed="menosMargenV"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMasMargenIni}" Executed="masMargenIni"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMenosMargenIni}" Executed="menosMargenIni"/>
+        <CommandBinding Command="{x:Static local:MainWindow.teclaMostrarEsqueleto}" Executed="mostrarSkeleton"/>
+    </Window.CommandBindings>
+</Window>
